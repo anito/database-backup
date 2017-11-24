@@ -56,7 +56,7 @@ class UsersController extends AppController {
               'id' => $this->Auth->user('id'),
               'username' => $this->Auth->user('username'),
               'name' => $this->Auth->user('name'),
-              'password' => '',
+              'password' => $this->Auth->user('password'),
               'sessionid' => $this->Session->id(),
               'groupname' => $this->_groupname(),
               'success' => 'true',

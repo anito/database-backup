@@ -24,61 +24,60 @@ App::uses('ConnectionManager', 'Model');
 
 class MysqlController extends AppController {
 
-		var $name = 'Mysql';
-		var $helpers = array();
-		var $uses = array();
+    var $name = 'Mysql';
+    var $helpers = array();
+    var $uses = array();
 
-		function beforeFilter() {
-				$this->autoRender = FALSE;
-				$this->Auth->allow = array('exec');
-				parent::beforeFilter();
-		}
+    function beforeFilter() {
+        $this->autoRender = FALSE;
+        $this->Auth->allow = array('exec');
+        parent::beforeFilter();
+    }
 
-		function exec() {
-				$allowed_actions = array('dump', 'restore', 'connect');
+    function exec() {
+        $allowed_actions = array('dump', 'restore', 'connect');
 
-				$action = array_splice($this->passedArgs, 0, 1);
-				$action = $action[0];
-				$args = implode(' ', $this->passedArgs);
+        $action = array_splice($this->passedArgs, 0, 1);
+        $action = $action[0];
+        $args = implode(' ', $this->passedArgs);
 
-				if (!in_array($action, $allowed_actions)) {
-						echo 'command not in list of allowed commands';
-						die;
-//						header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages'));
-				}
+        if (!in_array($action, $allowed_actions)) {
+            echo 'command not in list of allowed commands';
+            die;
+            header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages'));
+        }
 
-				$mysql = $this->mysql($action, $args);
-				
-		}
+        $mysql = $this->mysql($action, $args);
+    }
 
-		function mysql($action, $args = '') {
-				$ds = ConnectionManager::getDataSource('default');
-				$dsc = $ds->config;
-				$db = $dsc['database'];
+    function mysql($action, $args = '') {
+        $ds = ConnectionManager::getDataSource('default');
+        $dsc = $ds->config;
+        $db = $dsc['database'];
 
-				if ($action == 'dump') {
-						$postfix = MYSQL_CMD_PATH . 'mysqldump';
-						$io = '>';
-						$p = 'Datenbank erfolgreich gesichert';
-				} elseif ($action == 'restore') {
-						$postfix = MYSQL_CMD_PATH . 'mysql';
-						$io = '<';
-						$p = 'Datenbank erfolgreich wiederhergestellt';
-				} else {
-						$cmd = 'mysql connect localhost 2>&1';
-						$op = `$cmd`;
-//						return $op;
-				}
+        if ($action == 'dump') {
+            $postfix = MYSQL_CMD_PATH . 'mysqldump';
+            $io = '>';
+            $p = 'Datenbank erfolgreich gesichert';
+        } elseif ($action == 'restore') {
+            $postfix = MYSQL_CMD_PATH . 'mysql';
+            $io = '<';
+            $p = 'Datenbank erfolgreich wiederhergestellt';
+        } else {
+            $cmd = 'mysql connect localhost 2>&1';
+            $op = `$cmd`;
+//            return $op;
+        }
 
-				//die;
-				//$path = '/var/www/vhosts/webpremiere.de/mysql_backup/';
-//    $cmd = sprintf('%1s -uaxel -pkakadax -h localhost todos_backbone %2s /var/www/vhosts/webpremiere.de/mysqlÇ/file.sql 2>&1', $postfix, $io);
-//    $cmd = sprintf('%1s -uaxel -pkakadax -h localhost halehmann %2s ' . MYSQLUPLOAD . '/file.sql 2>&1', $postfix, $io);
-				$cmd = sprintf('%1s --defaults-extra-file=' . MYSQLCONFIG . '/my.cnf ' . $db . ' %2s ' . MYSQLUPLOAD . '/file.sql 2>&1', $postfix, $io);
-				$op = `$cmd`;
-				header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/success?p=' . $p));
-				die;
-//				return $op;
-		}
+//        die;
+//        $path = '/var/www/vhosts/webpremiere.de/mysql_backup/';
+//        $cmd = sprintf('%1s -uaxel -pkakadax -h localhost todos_backbone %2s /var/www/vhosts/webpremiere.de/mysqlÇ/file.sql 2>&1', $postfix, $io);
+//        $cmd = sprintf('%1s -uaxel -pkakadax -h localhost halehmann %2s ' . MYSQLUPLOAD . '/file.sql 2>&1', $postfix, $io);
+        $cmd = sprintf('%1s --defaults-extra-file=' . MYSQLCONFIG . '/my.cnf ' . $db . ' %2s ' . MYSQLUPLOAD . '/file.sql 2>&1', $postfix, $io);
+        $op = `$cmd`;
+        header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/success?p=' . $p));
+        die;
+//        return $op;
+    }
 
 }
