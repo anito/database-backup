@@ -42,10 +42,6 @@ class PagesController extends AppController {
 
         $this->autoRender = true;
         $this->Auth->allow('');
-<<<<<<< HEAD
-//        $this->Security->allowedControllers = array('pages');
-=======
->>>>>>> 6f4bcbb1020626e0502883be99a356c8f488ea4f
     }
 
     /**
@@ -73,10 +69,6 @@ class PagesController extends AppController {
         if (!empty($path[$count - 1])) {
             $title_for_layout = Inflector::humanize($path[$count - 1]);
             $name = $path[$count - 1];
-<<<<<<< HEAD
-//            var_dump($name);
-=======
->>>>>>> 6f4bcbb1020626e0502883be99a356c8f488ea4f
             if(file_exists(APP . '/View/Layouts/' . $name . '.ctp')) {
                 $this->layout = $name;
             }
