@@ -66,18 +66,13 @@ class MysqlController extends AppController {
         } else {
             $cmd = 'mysql connect localhost 2>&1';
             $op = `$cmd`;
-//            return $op;
+            return $op;
         }
 
-//        die;
-//        $path = '/var/www/vhosts/webpremiere.de/mysql_backup/';
-//        $cmd = sprintf('%1s -uaxel -pkakadax -h localhost todos_backbone %2s /var/www/vhosts/webpremiere.de/mysqlÇ/file.sql 2>&1', $postfix, $io);
-//        $cmd = sprintf('%1s -uaxel -pkakadax -h localhost halehmann %2s ' . MYSQLUPLOAD . '/file.sql 2>&1', $postfix, $io);
         $cmd = sprintf('%1s --defaults-extra-file=' . MYSQLCONFIG . '/my.cnf ' . $db . ' %2s ' . MYSQLUPLOAD . '/file.sql 2>&1', $postfix, $io);
         $op = `$cmd`;
         header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/success?p=' . $p));
         die;
-//        return $op;
     }
 
 }
