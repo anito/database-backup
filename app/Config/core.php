@@ -219,10 +219,10 @@ Configure::write('Routing.prefixes', array('admin'));
  * the cake shell command: cake schema create Sessions
  */
 	Configure::write('Session', array(
-		'defaults' => 'cache',
-    'cookie' => 'LEHMANN',
-    'timeout' => 3600
-	));
+            'defaults' => 'cache',
+            'cookie' => 'LEHMANN',
+            'timeout' => 3600
+        ));
 
 /**
  * A random string used in security hashing methods.
@@ -273,7 +273,7 @@ Configure::write('Routing.prefixes', array('admin'));
  * Uncomment this line and correct your server timezone to fix
  * any date & time related errors.
  */
-	//date_default_timezone_set('UTC');
+	date_default_timezone_set('Europe/Berlin');
 
 /**
  * `Config.timezone` is available in which you can set users' timezone string.
@@ -281,7 +281,7 @@ Configure::write('Routing.prefixes', array('admin'));
  * then the value of `Config.timezone` will be used. This feature allows you to set users' timezone just
  * once instead of passing it each time in function calls.
  */
-	//Configure::write('Config.timezone', 'Europe/Paris');
+	Configure::write('Config.timezone', 'Europe/Berlin');
 
 /**
  * Cache Engine Configuration

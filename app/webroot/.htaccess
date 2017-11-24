@@ -1,14 +1,9 @@
-# Uncomment the following to prevent the httpoxy vulnerability
-# See: https://httpoxy.org/
-#<IfModule mod_headers.c>
-#	RequestHeader unset Proxy
-#</IfModule>
-
 <IfModule mod_rewrite.c>
 	RewriteEngine On
+	RewriteBase /
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteRule ^ index.php [L]
+	RewriteRule ^ /index.php [L]
 </IfModule>
 <IfModule mod_deflate.c>
 	AddType image/svg+xml svg svgz

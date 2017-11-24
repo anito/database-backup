@@ -9,7 +9,7 @@ class UsersController extends AppController {
   public $helpers = array('Form');
 
   function beforeFilter() {
-    $this->Auth->allowedActions = array('login', 'logout', 'ping', 'getTmi');//, 'add', 'index', 'edit', 'view');
+    $this->Auth->allowedActions = array('login', 'logout', 'ping');//, 'add', 'index', 'edit', 'view');
 //    $this->Auth->allow();
     $this->allowedGroups = array('Administrators', 'Managers');
     $this->layout = 'cake';
@@ -56,7 +56,7 @@ class UsersController extends AppController {
               'id' => $this->Auth->user('id'),
               'username' => $this->Auth->user('username'),
               'name' => $this->Auth->user('name'),
-              'password' => '',
+              'password' => $this->Auth->user('password'),
               'sessionid' => $this->Session->id(),
               'groupname' => $this->_groupname(),
               'success' => 'true',
