@@ -9,7 +9,7 @@ class UsersController extends AppController {
   public $helpers = array('Form');
 
   function beforeFilter() {
-    $this->Auth->allowedActions = array('login', 'logout', 'ping', 'getTmi');//, 'add', 'index', 'edit', 'view');
+    $this->Auth->allowedActions = array('login', 'logout', 'ping');//, 'add', 'index', 'edit', 'view');
 //    $this->Auth->allow();
     $this->allowedGroups = array('Administrators', 'Managers');
     $this->layout = 'cake';
