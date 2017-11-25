@@ -62,6 +62,7 @@ class UsersController extends AppController {
                         'redirect' => $this->data['User']['redirect']
                     )));
                 } else {
+                    $this->Auth->logout();
                     $this->Flash->error(__('Login fehlgeschlagen'));
                     $this->response->header("WWW-Authenticate: Negotiate");
                     $this->set('_serialize', array_merge($this->data['User'], array(
@@ -73,10 +74,6 @@ class UsersController extends AppController {
                     )));
                 }
                 $this->render(FLASH_JSON);
-            } else {
-//        if($this->isAuthGroup()) {
-//          $this->Auth->login();
-//        }
             }
         } else {
             $this->set('redirect', $this->Auth->redirect(array('controller' => 'users', 'action' => 'index')));
