@@ -95,6 +95,8 @@ class Login extends Spine.Controller
   renderGuestLogin: ->
     unless Spine.isProduction
       @btnGuest.removeClass('hide')
+    else
+      @btnGuest.addClass('hide')
     
   guestLogin: ->
     @usernameEl.val('guest')

@@ -18166,6 +18166,8 @@ Released under the MIT License
     Login.prototype.renderGuestLogin = function() {
       if (!Spine.isProduction) {
         return this.btnGuest.removeClass('hide');
+      } else {
+        return this.btnGuest.addClass('hide');
       }
     };
 

@@ -59,7 +59,7 @@
 
 
 require('lib/setup')// HEM: load in specs from test js file
-var onlyMatchingModules = "";
+var onlyMatchingModules = "true";
 for (var key in specs.modules) {
   if (onlyMatchingModules && key.indexOf(onlyMatchingModules) == -1) {
     continue;
