@@ -21,6 +21,8 @@
  */
 App::uses('AppController', 'Controller');
 App::uses('ConnectionManager', 'Model');
+App::uses('Utility', 'File');
+
 
 class MysqlController extends AppController {
 
@@ -30,7 +32,9 @@ class MysqlController extends AppController {
 
     function beforeFilter() {
         $this->autoRender = FALSE;
-        $this->Auth->allow = array('exec');
+        $this->Auth->allow = array('');
+        define('USE_X_SEND', FALSE);
+        $this->disableCache();
         parent::beforeFilter();
     }
 
@@ -42,9 +46,10 @@ class MysqlController extends AppController {
         $args = implode(' ', $this->passedArgs);
 
         if (!in_array($action, $allowed_actions)) {
-            echo 'command not in list of allowed commands';
+            $message = 'command not in list of allowed commands';
+            $this->test = 'mytest';
+            header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . $message . '&c=error'));
             die;
-            header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages'));
         }
 
         $mysql = $this->mysql($action, $args);
@@ -58,11 +63,11 @@ class MysqlController extends AppController {
         if ($action == 'dump') {
             $postfix = MYSQL_CMD_PATH . 'mysqldump';
             $io = '>';
-            $p = 'Datenbank erfolgreich gesichert';
+            $message = 'Datenbank erfolgreich gesichert';
         } elseif ($action == 'restore') {
             $postfix = MYSQL_CMD_PATH . 'mysql';
             $io = '<';
-            $p = 'Datenbank erfolgreich wiederhergestellt';
+            $message = 'Datenbank erfolgreich wiederhergestellt';
         } else {
             $cmd = 'mysql connect localhost 2>&1';
             $op = `$cmd`;
@@ -70,9 +75,112 @@ class MysqlController extends AppController {
         }
 
         $cmd = sprintf('%1s --defaults-extra-file=' . MYSQLCONFIG . '/my.cnf ' . $db . ' %2s ' . MYSQLUPLOAD . '/file.sql 2>&1', $postfix, $io);
-        $op = `$cmd`;
-        header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/success?p=' . $p));
+        
+        exec($cmd, $output, $return_var);# execute the command
+        
+        if($return_var) {
+            $message = "Sorry - irgendwas ist schief gelaufen :(";
+            $result = "error";
+            $exists = file_exists(MYSQLUPLOAD . '/file.sql');
+            if(!$exists) {
+                $message = 'No MySQL dump file found';
+            } else {
+                $chars = array("\n", "\r");
+                $file = new File(MYSQLUPLOAD . '/file.sql');
+                $message .= str_replace($chars, "", $file->read());
+            }
+        } else {
+            $result = "success";
+        }
+        
+        header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . $message . '&c=' . $result));
         die;
+    }
+    
+    private function returnExt($file) {
+        $pos = strrpos($file, '.');
+        return strtolower(substr($file, $pos + 1, strlen($file)));
+    }
+    
+    public function uri() {
+        $json = array();
+        $fn = NULL;
+        if ($this->Auth->user('id')) {
+            $uid = $this->Auth->user('id');
+            if (!empty($this->data)) {
+                foreach ($this->data as $data) {
+                    $path = MYSQLUPLOAD . DS . '*.*';
+                    $files = glob($path);
+                    if(!empty($data['fn'])) {
+                        $fn = $data['fn'];
+                    }
+                    
+                    if (!empty($files[0])) {
+                        $fn = basename($files[0]);
+                        $options = compact(array('uid', 'fn'));
+                        $file = p($options);
+                    }
+                }
+            }
+        } else {
+            header('HTTP/1.1 403 Forbidden');
+            die;
+        }
+        header("Location: $file" );
+        die;
+    }
+    
+    function getFile() {
+        $this->autoRender = false;
+        $this->layout = false;
+        
+        $val = $this->request->params['named']['a'];
+        
+        if (strpos($val, 'http://') !== false || substr($val, 0, 1) == '/') {
+            header('Location: ' . $val);
+            exit;
+        } else {
+            $val = str_replace(' ', '.2B', $val);
+        }
+
+        App::import('Component', 'Salt');
+
+        $salt = new SaltComponent();
+
+        $val = str_replace(' ', '.2B', $val);
+        $crypt = $salt->convert($val, false);
+        $a = explode(',', $crypt);
+        $file = $fn = basename($a[1]);
+
+        // Make sure supplied filename contains only approved chars
+        if (preg_match("/[^A-Za-z0-9._-]/", $file)) {
+            header('HTTP/1.1 403 Forbidden');
+            exit;
+        }
+
+        $ext = $this->returnExt($file);
+
+        define('PATH', MYSQLUPLOAD );
+
+        $file = PATH . DS . $file;
+        $disabled_functions = explode(',', ini_get('disable_functions'));
+        
+        if (USE_X_SEND) {
+            header("X-Sendfile: $file");
+            header("Content-type: application/octet-stream");
+            header('Content-Disposition: attachment; filename="' . basename($file) . '"');
+        } else {
+            header('Content-type: application/octet-stream');
+            header('Content-length: ' . filesize($file));
+            header('Cache-Control: public');
+            header('Expires: ' . gmdate('D, d M Y H:i:s', strtotime('+1 year')));
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s', filemtime($file)));
+            if (is_callable('readfile') && !in_array('readfile', $disabled_functions)) {
+                readfile($file);
+            } else {
+                die(file_get_contents($file));
+            }
+        }
     }
 
 }

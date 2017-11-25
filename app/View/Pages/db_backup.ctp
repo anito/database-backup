@@ -18,7 +18,6 @@
 if (Configure::read('debug') == 0):
 //throw new NotFoundException();
 endif;
-//App::uses('Debugger', 'Utility');
 ?>
 <div itemscope itemtype="http://schema.org/SoftwareApplication" class="container">
     <header class="jumbotron masthead">
@@ -27,25 +26,36 @@ endif;
             <p>
                 Datenbank
             </p>
+            <?php echo $this->Form->create('User', array('url' => '/u')); ?>
             <table class="download-info button-wrap">
                 <tr style="text-align: center">
                     <td>
-                        <a href="#" data-href="<?php echo DIR_HOST; ?>/mysql/dump" class="btn btn-warning btn-large" type="submit" target="_self" onclick="jQuery.ask('dump', this);"><span itemprop="name">Sichern</span></a>
+                        <?php echo $this->Form->button('<i class="glyphicon glyphicon-download"></i><span>  Sichern</span>', array('href' => '#', 'data-href' => DIR_HOST.'/mysql/dump', 'onclick' => "jQuery.ask('dump', this); return false;", 'class' => array('btn', 'btn-warning', 'btn-large'),  'target' => "_self", 'label' => array(TRUE))); ?>
                         <i class="info"></i>
                     </td>
                 </tr>
                 <tr style="text-align: center">
                     <td>
-                        <a href="#" data-href="<?php echo DIR_HOST; ?>/mysql/restore" class="btn btn-danger btn-large" type="submit" target="_self" onclick="jQuery.ask('restore', this);"><span itemprop="name">Wiederherstellen</span></a>
+                        <?php echo $this->Form->button('<i class="glyphicon glyphicon-upload"></i><span>  Wiederherstellen</span>', array('href' => '#', 'data-href' => DIR_HOST.'/mysql/restore', 'onclick' => 'jQuery.ask(\'restore\', this); return false;', 'class' => array('btn', 'btn-danger', 'btn-large'),  'target' => "_self", 'label' => array(TRUE))); ?>
                         <i class="info"></i>
                     </td>
                 </tr>
                 <tr style="text-align: center">
                     <td colspan="2">
-                        <a href="<?php echo DIR_HOST; ?>/logout" class="btn btn-success btn-large" type="submit" target="_self"><span itemprop="name">Logout</span></a>
+                        <?php echo $this->Form->hidden('fn', array('value' => '')); ?>
+                        <?php echo $this->Form->button('<i class="glyphicon glyphicon-save"></i><span>  Download</span>', array('type'=>'submit', 'class' => array('btn', 'btn-info', 'btn-large'), 'label' => array(TRUE))); ?>
+                    </td>
+                </tr>
+                <tr style="text-align: center">
+                    <td colspan="2">
+                        <a href="<?php echo DIR_HOST; ?>/logout" class="btn btn-success btn-large" type="submit" target="_self">
+                            <i class="glyphicon glyphicon-log-out"></i>
+                            <span itemprop="name">Logout</span>
+                        </a>
                     </td>
                 </tr>
             </table>
+            </form>
         </div>
     </header>
 </div>

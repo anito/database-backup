@@ -35,8 +35,9 @@ class PagesController extends AppController {
      *
      * @var array
      */
-    public $uses = array('CategoriesProduct', 'ProductsPhoto', 'Category', 'Product', 'Photo', 'Description', 'User');
-
+    public $uses = array('User');
+    public $helper = array('Auth');
+    
     function beforeFilter() {
         parent::beforeFilter();
 

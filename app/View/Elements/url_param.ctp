@@ -1,8 +1,14 @@
 <?php
-$class = 'message';
-if (!empty($params['class'])) {
-    $class .= ' ' . $params['class'];
+$class = 'info-sign';
+$message = '';
+
+if (!empty($params['c'] && $params['c'] == "success")) {
+    $class = 'ok';
 }
-$message = $this->request->query['p'];
+if (!empty($params['m'])) {
+    $message .= $params['m'];
+}
+
 ?>
-<span class="<?php echo h($class) ?>"><?php echo h($message) ?></span>
+<i class="glyphicon glyphicon-<?php echo h($class); ?>"></i>
+<span class=""><?php echo h($message) ?></span>

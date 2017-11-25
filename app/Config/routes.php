@@ -31,6 +31,8 @@
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
         Router::connect('/logout', array('controller' => 'users', 'action' => 'logout'));
+        Router::connect('/u/*', array('controller' => 'mysql', 'action' => 'uri'));
+        Router::connect('/q/*', array('controller' => 'mysql', 'action' => 'getFile'));
         Router::connect('/mysql/*', array('controller' => 'mysql', 'action' => 'exec'));
 
         Router::mapResources(array());
