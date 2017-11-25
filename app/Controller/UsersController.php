@@ -47,7 +47,7 @@ class UsersController extends AppController {
         if ($this->request->is('ajax')) {
 
             if (!empty($this->data)) {
-                if ($this->Auth->login()) {
+                if ($this->Auth->login() && $this->isAuthGroup()) {
                     $this->User->id = $this->Auth->user('id');
                     $this->User->saveField('lastlogin', date('Y-m-d H:i:s'));
                     $this->Flash->success(__('Erfolgreich angemeldet als ' . $this->Auth->user('name')));
