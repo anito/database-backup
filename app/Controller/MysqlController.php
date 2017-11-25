@@ -97,10 +97,6 @@ class MysqlController extends AppController {
         die;
     }
     
-    private function returnExt($file) {
-        $pos = strrpos($file, '.');
-        return strtolower(substr($file, $pos + 1, strlen($file)));
-    }
     
     public function uri() {
         $json = array();
@@ -157,8 +153,6 @@ class MysqlController extends AppController {
             header('HTTP/1.1 403 Forbidden');
             exit;
         }
-
-        $ext = $this->returnExt($file);
 
         define('PATH', MYSQLUPLOAD );
 

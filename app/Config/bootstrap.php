@@ -172,19 +172,25 @@ function pre() {
     }
 }
 
+function returnExt($file) {
+    $pos = strrpos($file, '.');
+    return strtolower(substr($file, $pos + 1, strlen($file)));
+}
+
 function p($options) {
     $defaults = array(
         'fn' => 'file.sql'
     );
     $o = array_merge($defaults, $options);
-    $args = join(',', array($o['uid'], $o['fn']));
+    $args = join(',', array($o['uid'], $o['fn'], $o['ext']));
     include_once(ROOT . DS . 'app' . DS . 'Controller' . DS . 'Component' . DS . 'SaltComponent.php');
 
     $salt = new SaltComponent();
     $crypt = $salt->convert($args);
     $path = MYSQLUPLOAD . DS . $o['fn'];
     $m = filemtime($path);
+    $x = returnExt($path);
 //    $timestamp = gmdate('D, d M Y H:i:s');
     $timestamp = gmdate('Ymd:His');
-    return BASE_URL . '/q/a:' . $crypt . '/dump:' . $timestamp . '_' . $m;
+    return BASE_URL . '/q/a:' . $crypt . '/dump:' . $timestamp . '_' . $m . '.' . $x;
 }
