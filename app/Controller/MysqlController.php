@@ -97,7 +97,6 @@ class MysqlController extends AppController {
         die;
     }
     
-    
     public function uri() {
         $json = array();
         $fn = NULL;
