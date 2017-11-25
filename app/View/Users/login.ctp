@@ -10,8 +10,9 @@
           </header>
           <div class="dialogue-inner-wrap">
             <div class="drag-handle">
-              <h4 class="flash">HA-Lehmann Admin</h4>
-              <span class="h2" style="line-height: 4rem;">Login</span>
+                <i class="badge-logo"></i>
+              <h4 class="flash">Handelsagentur Lehmann</h4>
+              <div class="h2">Login</div>
               <div class="clearfix"></div>
             </div>
             <div class="dialogue-scroll table grid-2">
