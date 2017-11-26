@@ -50,7 +50,7 @@ endif;
                                             if(!count($files)) $files = array('' => 'keine Dateien gefunden');
                                             echo $this->Form->input('fn', array(
                                                 'options'   => $files,
-                                                'empty'     => 'bitte auswählen',
+                                                'empty'     => 'Sicherung auswählen',
                                                 'label'     => FALSE,
                                                 'id'        => 'fn_options'
                                             )); ?>
