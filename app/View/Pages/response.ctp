@@ -1,7 +1,8 @@
 <?php
     $params = $this->request->query;
 ?>
-<meta http-equiv="Refresh" content="5;url=/" />
+<meta http-equiv="" content="5;url=/" />
+<?php echo $this->Form->create('User', array('url' => DIR_HOST)); ?>
 <div itemscope itemtype="http://schema.org/SoftwareApplication" class="container">
     <header class="jumbotron masthead">
         <div class="inner">
@@ -15,10 +16,26 @@
                         <div class=""><?php echo $this->element('url_param', array('params' => $params)); ?></div>
                     </td>
                     <td>
-                        <a href="<?php echo DIR_HOST; ?>" class="btn btn-success" type="submit" target="_self"><span itemprop="name">zurück</span></a>
+                        <?php echo $this->Form->button('<i class="glyphicon glyphicon-arrow-left"></i><span>  zurück</span>', array(
+                            'id' => 'opt-return',
+                            'class' => array('btn', 'btn-success', 'btn-sm'),
+                            'target' => "_self",
+                            'label' => array(),
+                            'tabindex' => 0
+                        )); ?>
                     </td>
                 </tr>
             </table>
         </div>
     </header>
 </div>
+</form>
+<script type="text/javascript">
+    (function ($) {
+        'use strict';
+        
+        $('#opt-return').focus();
+        
+    })(jQuery)
+</script>
+    

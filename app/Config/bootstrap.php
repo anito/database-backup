@@ -194,14 +194,14 @@ function l($sort, $fullpath = FALSE) {
     return $time;
 }
 
-function c($max) {
+function c($max = 5) {
     App::uses('File', 'Utility');
     $files = l(SORT_ASC, TRUE);
     if(count($files) > $max) {
         $file = new File(key($files));
         $file->delete();
         $file->close();
-        c();
+        c($max);
     }
 }
 

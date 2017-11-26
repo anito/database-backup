@@ -29,12 +29,14 @@ endif;
                     <tr style="text-align: center">
                         <td>
                             <?php echo $this->Form->button('<i class="glyphicon glyphicon-download"></i><span>  Sichern</span>', array(
-                                'href' => '#',
+                                'id'        => 'opt-dump',
+                                'href'      => '#',
                                 'data-href' => DIR_HOST.'/mysql/dump',
-                                'onclick' => "jQuery.ask('dump', this); return false;",
-                                'class' => array('btn', 'btn-warning', 'btn-large'), 
-                                'target' => "_self",
-                                'label' => array(TRUE)
+                                'onclick'   => "jQuery.ask('dump', this); return false;",
+                                'class'     => array('btn', 'btn-warning', 'btn-large'), 
+                                'target'    => "_self",
+                                'label'     => array(TRUE),
+                                'tabindex'  => 0
                             )); ?>
                             <i class="info"></i>
                         </td>
@@ -49,23 +51,25 @@ endif;
                                             $files = l(SORT_DESC);
                                             if(!count($files)) $files = array('' => 'keine Dateien gefunden');
                                             echo $this->Form->input('fn', array(
+                                                'id'        => 'opt-options',
                                                 'options'   => $files,
                                                 'empty'     => 'Sicherung auswählen',
                                                 'label'     => FALSE,
-                                                'id'        => 'fn_options'
+                                                'tabindex'  => 1
                                             )); ?>
                                         </td>
                                     </tr>
                                     <tr style="text-align: center">
                                         <td>
                                             <?php echo $this->Form->button('<i class="glyphicon glyphicon-upload"></i><span>  Wiederherstellen</span>', array(
-                                                'id' => 'opt-restore',
-                                                'href' => '#',
+                                                'id'        => 'opt-restore',
+                                                'href'      => '#',
                                                 'data-href' => DIR_HOST.'/mysql/restore',
-                                                'onclick' => 'jQuery.ask(\'restore\', this); return false;',
-                                                'class' => array('btn', 'btn-danger', 'btn-large'),
-                                                'target' => "_self",
-                                                'label' => array()
+                                                'onclick'   => 'jQuery.ask(\'restore\', this); return false;',
+                                                'class'     => array('btn', 'btn-danger', 'btn-large'),
+                                                'target'    => "_self",
+                                                'label'     => array(),
+                                                'tabindex'  => 2
                                             )); ?>
                                             <i class="info"></i>
                                         </td>
@@ -73,10 +77,11 @@ endif;
                                     <tr style="text-align: center">
                                         <td colspan="2">
                                             <?php echo $this->Form->button('<i class="glyphicon glyphicon-save"></i><span>  Download</span>', array(
-                                                'id' => 'opt-download',
-                                                'type'=>'submit',
-                                                'class' => array('btn', 'btn-info', 'btn-large'),
-                                                'label' => array()
+                                                'id'        => 'opt-download',
+                                                'type'      =>'submit',
+                                                'class'     => array('btn', 'btn-info', 'btn-large'),
+                                                'label'     => array(),
+                                                'tabindex'  => 3
                                             )); ?>
                                         </td>
                                     </tr>
@@ -86,7 +91,7 @@ endif;
                     </tr>
                     <tr style="text-align: center">
                         <td colspan="2">
-                            <a href="<?php echo DIR_HOST; ?>/logout" class="btn btn-success btn-large" type="submit" target="_self">
+                            <a href="<?php echo DIR_HOST; ?>/logout" class="btn btn-success btn-large" type="submit" target="_self" tabindex="4">
                                 <i class="glyphicon glyphicon-log-out"></i>
                                 <span itemprop="name">Logout</span>
                             </a>
@@ -137,7 +142,9 @@ endif;
                 
             }
             
-            $('#fn_options').on('change', fnChange);
+            $('#opt-options').on('change', fnChange);
+            
+            $('#opt-dump').focus();
             
             fnChange();
             
