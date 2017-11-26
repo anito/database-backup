@@ -101,7 +101,7 @@ class MysqlController extends AppController {
         }
         
         if ($action == "dump") {
-            c(5); #cleanup older dump files
+            c(MAX_DUMPS); #cleanup older dump files
         }
         header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . $message . '&c=' . $result));
         die;

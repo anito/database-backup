@@ -164,6 +164,9 @@ if (!defined('MAGICK_PATH')) {
 } else {
     define('MAGICK_PATH_FINAL', MAGICK_PATH);
 }
+if (!defined('MAX_DUMPS')) {
+    define('MAX_DUMPS', 5);
+}
 
 function pre() {
     $args = func_get_args();
