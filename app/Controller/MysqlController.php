@@ -47,7 +47,6 @@ class MysqlController extends AppController {
 
         if (!in_array($action, $allowed_actions)) {
             $message = 'command not in list of allowed commands';
-            $this->test = 'mytest';
             header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . $message . '&c=error'));
             die;
         }
@@ -59,22 +58,30 @@ class MysqlController extends AppController {
         $ds = ConnectionManager::getDataSource('default');
         $dsc = $ds->config;
         $db = $dsc['database'];
+        $message = '';
 
         if ($action == 'dump') {
             $postfix = MYSQL_CMD_PATH . 'mysqldump';
             $io = '>';
             $message = 'Datenbank erfolgreich gesichert';
+            $fn = 'file_' . md5(date(time())) . '.sql';
         } elseif ($action == 'restore') {
-            $postfix = MYSQL_CMD_PATH . 'mysql';
-            $io = '<';
-            $message = 'Datenbank erfolgreich wiederhergestellt';
+            if (!empty($this->request->named['fn']) && !empty($this->request->ext) && $this->request->ext == 'sql') {
+                $fn = $this->request->named['fn'] . '.' . $this->request->ext;
+                $postfix = MYSQL_CMD_PATH . 'mysql';
+                $io = '<';
+                $message .= 'Datenbank erfolgreich wiederhergestellt';
+            } else {
+                $message .= 'wrong file';
+                $result = 'error';
+            }
         } else {
             $cmd = 'mysql connect localhost 2>&1';
             $op = `$cmd`;
             return $op;
         }
 
-        $cmd = sprintf('%1s --defaults-extra-file=' . MYSQLCONFIG . '/my.cnf ' . $db . ' %2s ' . MYSQLUPLOAD . '/file.sql 2>&1', $postfix, $io);
+        $cmd = sprintf('%1s --defaults-extra-file=' . MYSQLCONFIG . DS . 'my.cnf ' . $db . ' %2s ' . MYSQLUPLOAD . DS . $fn . ' 2>&1', $postfix, $io);
         
         exec($cmd, $output, $return_var);# execute the command
         
@@ -83,7 +90,7 @@ class MysqlController extends AppController {
             $result = "error";
             $exists = file_exists(MYSQLUPLOAD . '/file.sql');
             if(!$exists) {
-                $message = 'No MySQL dump file found';
+                $message .= 'No MySQL dump file found';
             } else {
                 $chars = array("\n", "\r");
                 $file = new File(MYSQLUPLOAD . '/file.sql');
@@ -93,29 +100,36 @@ class MysqlController extends AppController {
             $result = "success";
         }
         
+        if ($action == "dump") {
+            c(5); #cleanup older dump files
+        }
         header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . $message . '&c=' . $result));
         die;
     }
     
     public function uri() {
         $json = array();
-        $fn = NULL;
+        $fn = '*.*';
         if ($this->Auth->user('id')) {
             $uid = $this->Auth->user('id');
             if (!empty($this->data)) {
                 foreach ($this->data as $data) {
-                    $path = MYSQLUPLOAD . DS . '*.*';
-                    $files = glob($path);
                     if(!empty($data['fn'])) {
                         $fn = $data['fn'];
                     }
-                    
-                    if (!empty($files[0])) {
-                        $fn = basename($files[0]);
-                        $options = compact(array('uid', 'fn'));
-                        $file = p($options);
-                    }
                 }
+            }
+            $path = MYSQLUPLOAD . DS . $fn;
+            $files = glob($path);
+            $fn = basename($files[0]);
+            if(!empty($files[0])) {
+                $options = compact(array('uid', 'fn'));
+                $file = p($options);
+            } else {
+                $message = 'kein Download verfügbar';
+                $result = 'error';
+                header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . $message . '&c=' . $result));
+                die;
             }
         } else {
             header('HTTP/1.1 403 Forbidden');

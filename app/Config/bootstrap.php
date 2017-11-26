@@ -177,12 +177,40 @@ function returnExt($file) {
     return strtolower(substr($file, $pos + 1, strlen($file)));
 }
 
+function l($sort, $fullpath = FALSE) {
+    App::uses('CakeTime', 'Utility');
+    $time = array();
+    $path = MYSQLUPLOAD . DS . '*.*';
+    $files = glob($path);
+    foreach ($files as $key => $val) {
+        $timestamp = CakeTime::format(filemtime($val), '%e.%b %Y %H:%M');
+        if(!$fullpath) {
+            $parts = explode(DS, $val);
+            $val = array_pop($parts);
+        }
+        $time[$val] = $timestamp;
+    }
+    array_multisort($time, $sort, $files);
+    return $time;
+}
+
+function c($max) {
+    App::uses('File', 'Utility');
+    $files = l(SORT_ASC, TRUE);
+    if(count($files) > $max) {
+        $file = new File(key($files));
+        $file->delete();
+        $file->close();
+        c();
+    }
+}
+
 function p($options) {
     $defaults = array(
         'fn' => 'file.sql'
     );
     $o = array_merge($defaults, $options);
-    $args = join(',', array($o['uid'], $o['fn'], $o['ext']));
+    $args = join(',', array($o['uid'], $o['fn']));
     include_once(ROOT . DS . 'app' . DS . 'Controller' . DS . 'Component' . DS . 'SaltComponent.php');
 
     $salt = new SaltComponent();
@@ -191,6 +219,6 @@ function p($options) {
     $m = filemtime($path);
     $x = returnExt($path);
 //    $timestamp = gmdate('D, d M Y H:i:s');
-    $timestamp = gmdate('Ymd:His');
+    $timestamp = date('Ymd:His');
     return BASE_URL . '/q/a:' . $crypt . '/dump:' . $timestamp . '_' . $m . '.' . $x;
 }

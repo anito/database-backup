@@ -23,38 +23,76 @@ endif;
     <header class="jumbotron masthead">
         <div class="inner">
             <h1></h1>
-            <p>
-                Datenbank
-            </p>
+            <p>Datenbank</p>
             <?php echo $this->Form->create('User', array('url' => '/u')); ?>
-            <table class="download-info button-wrap">
-                <tr style="text-align: center">
-                    <td>
-                        <?php echo $this->Form->button('<i class="glyphicon glyphicon-download"></i><span>  Sichern</span>', array('href' => '#', 'data-href' => DIR_HOST.'/mysql/dump', 'onclick' => "jQuery.ask('dump', this); return false;", 'class' => array('btn', 'btn-warning', 'btn-large'),  'target' => "_self", 'label' => array(TRUE))); ?>
-                        <i class="info"></i>
-                    </td>
-                </tr>
-                <tr style="text-align: center">
-                    <td>
-                        <?php echo $this->Form->button('<i class="glyphicon glyphicon-upload"></i><span>  Wiederherstellen</span>', array('href' => '#', 'data-href' => DIR_HOST.'/mysql/restore', 'onclick' => 'jQuery.ask(\'restore\', this); return false;', 'class' => array('btn', 'btn-danger', 'btn-large'),  'target' => "_self", 'label' => array(TRUE))); ?>
-                        <i class="info"></i>
-                    </td>
-                </tr>
-                <tr style="text-align: center">
-                    <td colspan="2">
-                        <?php echo $this->Form->hidden('fn', array('value' => '')); ?>
-                        <?php echo $this->Form->button('<i class="glyphicon glyphicon-save"></i><span>  Download</span>', array('type'=>'submit', 'class' => array('btn', 'btn-info', 'btn-large'), 'label' => array(TRUE))); ?>
-                    </td>
-                </tr>
-                <tr style="text-align: center">
-                    <td colspan="2">
-                        <a href="<?php echo DIR_HOST; ?>/logout" class="btn btn-success btn-large" type="submit" target="_self">
-                            <i class="glyphicon glyphicon-log-out"></i>
-                            <span itemprop="name">Logout</span>
-                        </a>
-                    </td>
-                </tr>
-            </table>
+                <table class="download-info button-wrap">
+                    <tr style="text-align: center">
+                        <td>
+                            <?php echo $this->Form->button('<i class="glyphicon glyphicon-download"></i><span>  Sichern</span>', array(
+                                'href' => '#',
+                                'data-href' => DIR_HOST.'/mysql/dump',
+                                'onclick' => "jQuery.ask('dump', this); return false;",
+                                'class' => array('btn', 'btn-warning', 'btn-large'), 
+                                'target' => "_self",
+                                'label' => array(TRUE)
+                            )); ?>
+                            <i class="info"></i>
+                        </td>
+                    </tr>
+                    <tr class="" style="text-align: center">
+                        <td colspan="2">
+                            <div class="filebox">
+                                <table class="">
+                                    <tr style="text-align: center">
+                                        <td colspan="2">
+                                            <?php
+                                            $files = l(SORT_DESC);
+                                            if(!count($files)) $files = array('' => 'keine Dateien gefunden');
+                                            echo $this->Form->input('fn', array(
+                                                'options'   => $files,
+                                                'empty'     => 'bitte auswählen',
+                                                'label'     => FALSE,
+                                                'id'        => 'fn_options'
+                                            )); ?>
+                                        </td>
+                                    </tr>
+                                    <tr style="text-align: center">
+                                        <td>
+                                            <?php echo $this->Form->button('<i class="glyphicon glyphicon-upload"></i><span>  Wiederherstellen</span>', array(
+                                                'id' => 'opt-restore',
+                                                'href' => '#',
+                                                'data-href' => DIR_HOST.'/mysql/restore',
+                                                'onclick' => 'jQuery.ask(\'restore\', this); return false;',
+                                                'class' => array('btn', 'btn-danger', 'btn-large'),
+                                                'target' => "_self",
+                                                'label' => array()
+                                            )); ?>
+                                            <i class="info"></i>
+                                        </td>
+                                    </tr>
+                                    <tr style="text-align: center">
+                                        <td colspan="2">
+                                            <?php echo $this->Form->button('<i class="glyphicon glyphicon-save"></i><span>  Download</span>', array(
+                                                'id' => 'opt-download',
+                                                'type'=>'submit',
+                                                'class' => array('btn', 'btn-info', 'btn-large'),
+                                                'label' => array()
+                                            )); ?>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="text-align: center">
+                        <td colspan="2">
+                            <a href="<?php echo DIR_HOST; ?>/logout" class="btn btn-success btn-large" type="submit" target="_self">
+                                <i class="glyphicon glyphicon-log-out"></i>
+                                <span itemprop="name">Logout</span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
             </form>
         </div>
     </header>
@@ -64,7 +102,7 @@ endif;
         'use strict';
 
         var termini = {
-            dump: 'Alle Daten werden nun gesichert. Die letzte Sicherung wird damit überschrieben.\n\nFortfahren?',
+            dump: 'Daten werden jetzt gesichert. Die älteste Sicherung (maximal 5) wird damit überschrieben.\n\nFortfahren?',
             restore: 'Soll die letzte Sicherung wiederhergestellt werden?'
         }, res;
 
@@ -75,12 +113,37 @@ endif;
                 return;
 
             if (window.confirm(res)) {
-                window.location.href = $(me).data('href');
+                var data = $(me).data();
+                console.log($(me).data());
+                
+                window.location.href = data['href'] + '/fn:' + data['fn'];
             } else {
                 alert("Vorgang abgebrochen")
             }
         };
+        
+        
+        $.setup = function() {
+            
+            var downloadEl  = $('#opt-download');
+            var restoreEl   = $('#opt-restore');
+            
+            function fnChange(e) {
+                
+                var val = $(this).val();
+            
+                downloadEl.attr('disabled', !val).attr('data-fn', val);
+                restoreEl.attr('disabled', !val).attr('data-fn', val);
+                
+            }
+            
+            $('#fn_options').on('change', fnChange);
+            
+            fnChange();
+            
+        }
     })(jQuery)
+    jQuery.setup();
 
 
 </script>
