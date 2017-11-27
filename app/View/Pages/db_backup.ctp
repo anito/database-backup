@@ -49,11 +49,11 @@ endif;
                                         <td colspan="2">
                                             <?php
                                             $files = l(SORT_DESC);
-                                            if(!count($files)) $files = array('' => 'keine Dateien gefunden');
+                                            $emptyText = !count($files) ? 'keine Sicherungen vorhanden' : 'Sicherung auswählen';
                                             echo $this->Form->input('fn', array(
                                                 'id'        => 'opt-options',
                                                 'options'   => $files,
-                                                'empty'     => 'Sicherung auswählen',
+                                                'empty'     => $emptyText,
                                                 'label'     => FALSE,
                                                 'tabindex'  => 1
                                             )); ?>
