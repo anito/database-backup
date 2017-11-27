@@ -107,8 +107,8 @@ endif;
         'use strict';
 
         var termini = {
-            dump: 'Daten werden jetzt gesichert. Die älteste Sicherung (maximal 5) wird damit überschrieben.\n\nFortfahren?',
-            restore: 'Soll die letzte Sicherung wiederhergestellt werden?'
+            dump: 'Datensicherung wird gestartet.\n\nFortfahren?',
+            restore: 'Soll diese Sicherung wiederhergestellt werden?'
         }, res;
 
         $.ask = function (type, me) {
