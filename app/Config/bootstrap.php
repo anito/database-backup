@@ -124,8 +124,24 @@ define('BASE_URL', Configure::read('App.baseUrl'));
 define('WEB_URL', '/' . APP_DIR . '/' . WEBROOT_DIR);
 define('UPLOADS', ROOT . DS . 'uploads');
 define('PHOTOS', UPLOADS . DS . 'photos');
-define('MYSQLCONFIG', ROOT . DS . 'mysqlconf');
-define('MYSQLUPLOAD', ROOT . DS . 'mysql');
+if(!defined('MYSQLCONFIG')) {
+    define('MYSQLCONFIG', ROOT . DS . 'mysqlconf');
+    if (!is_dir(MYSQLCONFIG)) {
+        $parent_perms = substr(sprintf('%o', fileperms(dirname(dirname(MYSQLCONFIG)))), -4);
+        $old = umask(0);
+        mkdir(MYSQLCONFIG, octdec($parent_perms));
+        umask($old);
+    }
+}
+if(!defined('MYSQLUPLOAD')) {
+    define('MYSQLUPLOAD', ROOT . DS . 'mysql');
+    if (!is_dir(MYSQLUPLOAD)) {
+        $parent_perms = substr(sprintf('%o', fileperms(dirname(dirname(MYSQLUPLOAD)))), -4);
+        $old = umask(0);
+        mkdir(MYSQLUPLOAD, octdec($parent_perms));
+        umask($old);
+    }
+}
 define('STATCONFIG', '../../' . WEBROOT_DIR . DS . 'stat' . DS . 'config' . DS);
 define('DEFAULT_USER', 'angela');
 if (!defined('MYSQL_CMD_PATH')) {
