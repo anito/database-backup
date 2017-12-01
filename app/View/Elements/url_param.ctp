@@ -2,7 +2,7 @@
 $class = 'info-sign';
 $message = '';
 
-if (!empty($params['c'] && $params['c'] == "success")) {
+if (!empty($params['c'] & $params['c'] == "success")) {
     $class = 'ok';
 }
 if (!empty($params['m'])) {
