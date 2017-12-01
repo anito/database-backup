@@ -34,3 +34,4 @@ mysql/*
 mysqlconf/*
 /app/webroot/googlec455ce6e66bdc8d6.html
 app/webroot/google58799cfc93ea70b6.html
+*.sql

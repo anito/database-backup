@@ -185,6 +185,7 @@ function l($sort, $fullpath = FALSE) {
     $time = array();
     $path = MYSQLUPLOAD . DS . '*.*';
     $files = glob($path);
+    if(!is_array($files)) $files = [];
     foreach ($files as $key => $val) {
         $timestamp = CakeTime::format(filemtime($val), '%e.%b %Y %H:%M');
         if(!$fullpath) {
