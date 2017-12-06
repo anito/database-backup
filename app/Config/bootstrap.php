@@ -220,12 +220,9 @@ function l($sort, $fullpath = FALSE) {
 function c($max = 5) {
     App::uses('File', 'Utility');
     $files = l(SORT_ASC, TRUE);
-    var_dump($files);
     reset($files);
-    var_dump(key($files));
-    die;
     if(count($files) > $max) {
-        $file = new File(min($files));
+        $file = new File(key($files));
         $file->delete();
         $file->close();
         c($max);
