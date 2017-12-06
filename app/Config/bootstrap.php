@@ -203,7 +203,7 @@ function l($sort, $fullpath = FALSE) {
     $files = glob($path);
     if(!is_array($files)) $files = [];
     foreach ($files as $key => $val) {
-        $timestamp = CakeTime::format(filemtime($val), '%e.%b %Y %H:%M');
+        $timestamp = filemtime($val);
         if(!$fullpath) {
             $parts = explode(DS, $val);
             $val = array_pop($parts);
@@ -212,9 +212,8 @@ function l($sort, $fullpath = FALSE) {
     }
     array_multisort($time, $sort);
     foreach ($time as $key => $val) {
-//        $time[$key] = CakeTime::format($val, '%e.%b %Y %H:%M');
+        $time[$key] = CakeTime::format($val, '%e.%b %Y %H:%M');
     }
-//    var_dump($time);
     return $time;
 }
 
