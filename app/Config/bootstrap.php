@@ -210,15 +210,22 @@ function l($sort, $fullpath = FALSE) {
         }
         $time[$val] = $timestamp;
     }
-    array_multisort($time, $sort, $files);
+    array_multisort($time, $sort);
+    foreach ($time as $key => $val) {
+//        $time[$key] = CakeTime::format($val, '%e.%b %Y %H:%M');
+    }
+//    var_dump($time);
     return $time;
 }
 
 function c($max = 5) {
     App::uses('File', 'Utility');
     $files = l(SORT_ASC, TRUE);
+    var_dump($files);
+    var_dump(min($files));
+    die;
     if(count($files) > $max) {
-        $file = new File(key($files));
+        $file = new File(min($files));
         $file->delete();
         $file->close();
         c($max);
