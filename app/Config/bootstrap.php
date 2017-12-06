@@ -222,7 +222,7 @@ function c($max = 5) {
     App::uses('File', 'Utility');
     $files = l(SORT_ASC, TRUE);
     var_dump($files);
-    var_dump(min($files));
+    var_dump(key($files));
     die;
     if(count($files) > $max) {
         $file = new File(min($files));
