@@ -212,7 +212,7 @@ function l($sort, $fullpath = FALSE) {
     }
     array_multisort($time, $sort);
     foreach ($time as $key => $val) {
-        $time[$key] = CakeTime::format($val, '%e.%b %Y %H:%M');
+        $time[$key] = CakeTime::format($val, '%d. %b %Y %H:%M');
     }
     return $time;
 }
