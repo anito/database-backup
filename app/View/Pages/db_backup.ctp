@@ -30,6 +30,7 @@ endif;
                         <td>
                             <?php echo $this->Form->button('<i class="glyphicon glyphicon-download"></i><span>  Sichern</span>', array(
                                 'id'        => 'opt-dump',
+                                'title'       => 'aktuellen Datenstand sichern',
                                 'href'      => '#',
                                 'data-href' => DIR_HOST.'/mysql/dump',
                                 'onclick'   => "jQuery.ask('dump', this); return false;",
@@ -63,6 +64,7 @@ endif;
                                         <td>
                                             <?php echo $this->Form->button('<i class="glyphicon glyphicon-upload"></i><span>  Wiederherstellen</span>', array(
                                                 'id'        => 'opt-restore',
+                                                'title'     => 'ausgewählten Datenstand wiedererstellen',
                                                 'href'      => '#',
                                                 'data-href' => DIR_HOST.'/mysql/restore',
                                                 'onclick'   => 'jQuery.ask(\'restore\', this); return false;',
@@ -78,6 +80,7 @@ endif;
                                         <td colspan="2">
                                             <?php echo $this->Form->button('<i class="glyphicon glyphicon-save"></i><span>  Download</span>', array(
                                                 'id'        => 'opt-download',
+                                                'title'     => 'ausgewählten Datenstand herunterladen',
                                                 'type'      =>'submit',
                                                 'class'     => array('btn', 'btn-info', 'btn-large'),
                                                 'label'     => array(),
