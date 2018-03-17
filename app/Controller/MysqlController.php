@@ -32,12 +32,11 @@ class MysqlController extends AppController {
 
     function beforeFilter() {
         $this->autoRender = FALSE;
-        $this->Auth->allow = array('');
         define('USE_X_SEND', FALSE);
         $this->disableCache();
         parent::beforeFilter();
     }
-
+    
     function exec() {
         $allowed_actions = array('dump', 'restore', 'connect');
 

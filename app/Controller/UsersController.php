@@ -10,8 +10,7 @@ class UsersController extends AppController {
     public $helpers = array('Form');
 
     function beforeFilter() {
-        $this->Auth->allowedActions = array('login', 'logout', 'ping'); //, 'add', 'index', 'edit', 'view');
-//    $this->Auth->allow();
+        $this->Auth->allowedActions = array('login', 'logout', 'ping', 'lastSaved'); //, 'add', 'index', 'edit', 'view');
         $this->allowedGroups = array('Administrators', 'Managers');
         $this->layout = 'cake';
 
@@ -201,8 +200,7 @@ class UsersController extends AppController {
     }
 
     function ping() {
-        $user = $this->Auth->user();
-//    $this->log($this->Session->read(), LOG_DEBUG);
+//        $this->log($this->Session->read(), LOG_DEBUG);
         if ($this->request->is('ajax')) {
             if (!empty($this->data) && !empty($user)) {
                 $tmi = $this->User->read('tmi', $this->Auth->user('id'));
@@ -259,6 +257,19 @@ class UsersController extends AppController {
             }
             $this->render(SIMPLE_JSON);
         }
+    }
+    
+    
+    
+    public function lastSaved() {
+        $this->layout = false;
+        
+        $files = l(SORT_DESC);
+        reset( $files );
+        $first = current($files);
+        $this->set('content', $first );
+        $this->render('/Elements/content');
+        
     }
 
 }
