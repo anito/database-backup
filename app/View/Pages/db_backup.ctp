@@ -18,6 +18,11 @@
 if (Configure::read('debug') == 0):
 //throw new NotFoundException();
 endif;
+
+$files              = l(SORT_DESC);
+reset( $files );
+$last_backup_date   = current($files);
+
 ?>
 <div itemscope itemtype="http://schema.org/SoftwareApplication" class="container">
     <header class="jumbotron masthead">
@@ -49,7 +54,7 @@ endif;
                                     <tr style="text-align: center">
                                         <td colspan="2">
                                             <?php
-                                            $files = l(SORT_DESC);
+                                            
                                             $emptyText = !count($files) ? 'keine Sicherungen vorhanden' : 'Sicherung auswählen';
                                             echo $this->Form->input('fn', array(
                                                 'id'        => 'opt-options',
@@ -103,6 +108,7 @@ endif;
                 </table>
             </form>
         </div>
+        <div class="backup-info">Letztes Backup: <i><?php echo $last_backup_date; ?></i></div>
     </header>
 </div>
 <script type="text/javascript">

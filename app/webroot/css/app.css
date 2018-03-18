@@ -90,11 +90,24 @@ i.info {
   margin: 0 auto;
   text-align: center;
 }
+.backup-info {
+    position: absolute;
+    right: 0;
+    top: 8px;
+    font-size: 0.5em;
+    padding: 0 1em;
+}
 
+.backup-info > i {
+    font-weight: 400;
+    padding: .3em .5em;
+    font-style: normal;
+    background: #e2e1e1;
+    border-radius: 3PX;
+}
 /* Masthead (docs home) */
 .masthead {
   padding-top: 36px;
-  margin-bottom: 72px;
 }
 .masthead h1,
 .masthead p {
