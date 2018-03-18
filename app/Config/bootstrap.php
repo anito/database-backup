@@ -251,7 +251,7 @@ function p($options) {
     return BASE_URL . '/q/a:' . $crypt . '/dump:' . $timestamp . '_' . $m . '.' . $x;
 }
 /*
- * get the age in days of Backup
+ * get difference of 2 times
  * 
  */
 function get_time_diff( $time, $time_unit = "d" ) {
@@ -285,5 +285,5 @@ function get_time_diff( $time, $time_unit = "d" ) {
 			$unit_name = sprintf( 'Minute%s', 1 !== $total ? 'n' : ''  );
 			break;
 	}
-	return array( 'total' => round($total), 'name' => $unit_name );
+	return array( 'total' => round($total, 1, PHP_ROUND_HALF_UP), 'name' => $unit_name );
 }
