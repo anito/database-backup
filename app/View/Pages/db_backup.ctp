@@ -39,7 +39,7 @@ if( !$date ) {
         }
     }
     $age    = $diff['total'] . ' ' . $diff['name'];
-    $text   = sprintf( 'Letztes Backup vor <i>%s</i> (%s)', $age, $date );
+    $text   = sprintf( 'Letztes Backup vor <i>%s</i><span style="opacity: 0.5;"> am %s</span>', $age, $date );
 }
 ?>
 <div itemscope itemtype="http://schema.org/SoftwareApplication" class="container">
