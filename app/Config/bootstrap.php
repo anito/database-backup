@@ -196,7 +196,7 @@ function returnExt($file) {
     return strtolower(substr($file, $pos + 1, strlen($file)));
 }
 
-function l($sort, $fullpath = FALSE) {
+function l($sort, $fullpath = FALSE, $human = TRUE) {
     App::uses('CakeTime', 'Utility');
     $time = array();
     $path = MYSQLUPLOAD . DS . '*.*';
@@ -211,10 +211,14 @@ function l($sort, $fullpath = FALSE) {
         $time[$val] = $timestamp;
     }
     array_multisort($time, $sort);
-    foreach ($time as $key => $val) {
-        $time[$key] = CakeTime::format($val, '%d. %b %Y %H:%M');
+    if(!$human) {
+        return $time;
+    } else {
+        foreach ($time as $key => $val) {
+            $time[$key] = CakeTime::format($val, '%d. %b %Y %H:%M');
+        }
+        return $time;
     }
-    return $time;
 }
 
 function c($max = 5) {
