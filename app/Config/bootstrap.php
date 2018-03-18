@@ -250,3 +250,16 @@ function p($options) {
     $timestamp = date('Ymd:His');
     return BASE_URL . '/q/a:' . $crypt . '/dump:' . $timestamp . '_' . $m . '.' . $x;
 }
+function get_day_diff( $time ) {
+
+    $now = date_create();
+
+    if( !isset( $time ) )
+        $time = $now;
+
+    $lst = date_create( date("Y-m-d h:i:s", $time ) );
+    $diff = date_diff( $lst, $now );
+    $age = $diff->d;
+    return $age;
+
+}

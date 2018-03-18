@@ -19,9 +19,15 @@ if (Configure::read('debug') == 0):
 //throw new NotFoundException();
 endif;
 
-$files              = l(SORT_DESC);
-reset( $files );
-$last_backup_date   = current($files);
+$files_human   = l(SORT_DESC);
+reset( $files_human );
+$date          = current($files_human);
+
+$files_raw     = l(SORT_DESC, FALSE, FALSE);
+reset( $files_raw );
+$raw_date    = current($files_raw);
+
+$age           = get_day_diff(intval($raw_date) );
 
 ?>
 <div itemscope itemtype="http://schema.org/SoftwareApplication" class="container">
@@ -55,10 +61,10 @@ $last_backup_date   = current($files);
                                         <td colspan="2">
                                             <?php
                                             
-                                            $emptyText = !count($files) ? 'keine Sicherungen vorhanden' : 'Sicherung auswählen';
+                                            $emptyText = !count($files_human) ? 'keine Sicherungen vorhanden' : 'Sicherung auswählen';
                                             echo $this->Form->input('fn', array(
                                                 'id'        => 'opt-options',
-                                                'options'   => $files,
+                                                'options'   => $files_human,
                                                 'empty'     => $emptyText,
                                                 'label'     => FALSE,
                                                 'tabindex'  => 1
@@ -108,7 +114,7 @@ $last_backup_date   = current($files);
                 </table>
             </form>
         </div>
-        <div class="backup-info">Letztes Backup: <i><?php echo $last_backup_date; ?></i></div>
+        <div class="backup-info">Letztes Backup vor <i><?php echo sprintf( '%s Tagen', $age ); ?></i><?php echo ' (' . $date . ')'; ?></div>
     </header>
 </div>
 <script type="text/javascript">
