@@ -147,6 +147,7 @@ $age           = get_day_diff(intval($raw_date) );
             
             var downloadEl  = $('#opt-download');
             var restoreEl   = $('#opt-restore');
+            var dumpEl      = $('#opt-dump');
             
             function fnChange(e) {
                 
@@ -155,11 +156,15 @@ $age           = get_day_diff(intval($raw_date) );
                 downloadEl.attr('disabled', !val).attr('data-fn', val);
                 restoreEl.attr('disabled', !val).attr('data-fn', val);
                 
+                if(val)
+                    restoreEl.focus()
+                else
+                    dumpEl.focus();
             }
             
             $('#opt-options').on('change', fnChange);
             
-            $('#opt-dump').focus();
+            dumpEl.focus();
             
             fnChange();
             
