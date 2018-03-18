@@ -114,7 +114,7 @@ $age           = get_day_diff(intval($raw_date) );
                 </table>
             </form>
         </div>
-        <div class="backup-info">Letztes Backup vor <i><?php echo sprintf( '%s Tagen', $age ); ?></i><?php echo ' (' . $date . ')'; ?></div>
+        <div class="backup-info">Letztes Backup vor <i><?php echo sprintf( '%s Tag%s', $age, 1 !== $age ? 'en' : '' ); ?></i><?php echo ' (' . $date . ')'; ?></div>
     </header>
 </div>
 <script type="text/javascript">
