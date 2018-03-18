@@ -250,16 +250,40 @@ function p($options) {
     $timestamp = date('Ymd:His');
     return BASE_URL . '/q/a:' . $crypt . '/dump:' . $timestamp . '_' . $m . '.' . $x;
 }
-function get_day_diff( $time ) {
+/*
+ * get the age in days of Backup
+ * 
+ */
+function get_time_diff( $time, $time_unit = "d" ) {
 
-    $now = date_create();
+	$now = date_create();
 
-    if( !isset( $time ) )
-        $time = $now;
+	if ( !isset( $time ) )
+		$time = $now;
 
-    $lst = date_create( date("Y-m-d h:i:s", $time ) );
-    $diff = date_diff( $lst, $now );
-    $age = $diff->d;
-    return $age;
-
+	$lst = date_create( date( "Y-m-d h:i:s", $time ) );
+	$diff = date_diff( $lst, $now );
+	switch( $time_unit ) {
+		case "y":
+			$total = $diff->y + $diff->m / 12 + $diff->d / 365.25;
+			$unit_name = sprintf( 'Jahr%s', 1 !== $total ? 'en' : ''  );
+			break;
+		case "m":
+			$total= $diff->y * 12 + $diff->m + $diff->d/30 + $diff->h / 24;
+			$unit_name = sprintf( 'Monat%s', 1 !== $total ? 'en' : ''  );
+			break;
+		case "d":
+			$total = $diff->y * 365.25 + $diff->m * 30 + $diff->d + $diff->h/24 + $diff->i/60;
+			$unit_name = sprintf( 'Tag%s', 1 !== $total ? 'en' : ''  );
+			break;
+		case "h":
+			$total = ($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h + $diff->i/60;
+			$unit_name = sprintf( 'Stunde%s', 1 !== $total ? 'n' : ''  );
+			break;
+		case "i":
+			$total = (($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i + $diff->s/60;
+			$unit_name = sprintf( 'Minute%s', 1 !== $total ? 'n' : ''  );
+			break;
+	}
+	return array( 'total' => round($total), 'name' => $unit_name );
 }

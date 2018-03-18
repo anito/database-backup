@@ -22,13 +22,25 @@ endif;
 $files_human   = l(SORT_DESC);
 reset( $files_human );
 $date          = current($files_human);
-
-$files_raw     = l(SORT_DESC, FALSE, FALSE);
-reset( $files_raw );
-$raw_date    = current($files_raw);
-
-$age           = get_day_diff(intval($raw_date) );
-
+if( !$date ) {
+    $date	= '<strong><span style="color: #f00;">Noch kein Backup vorhanden!</span></strong>';
+    $text =  sprintf('Letztes Backup: %s ', $date );
+} else {
+    $files_raw     = l(SORT_DESC, FALSE, FALSE); // get UNIX-Timestamp
+    reset( $files_raw );
+    $last_backup    = current($files_raw);
+    if( ( $diff = get_time_diff( $last_backup, 'i' ) ) && ( $diff['total'] > 59 ) ) { // express in minutes
+        if( ( $diff = get_time_diff( $last_backup, 'h' ) ) && ( $diff['total'] > 23 ) ) { // express in hours
+            if( ( $diff = get_time_diff( $last_backup, 'd' ) ) && ( $diff['total'] > 29 ) ) { // express in days
+                if( ( $diff = get_time_diff( $last_backup, 'm' ) ) && ( $diff['total'] > 11 ) ) { // express in months
+                    $diff = get_time_diff( $last_backup, 'y' ); // express in years
+                }
+            }
+        }
+    }
+    $age    = $diff['total'] . ' ' . $diff['name'];
+    $text   = sprintf( 'Letztes Backup vor <i>%s</i> (%s)', $age, $date );
+}
 ?>
 <div itemscope itemtype="http://schema.org/SoftwareApplication" class="container">
     <header class="jumbotron masthead">
@@ -114,7 +126,7 @@ $age           = get_day_diff(intval($raw_date) );
                 </table>
             </form>
         </div>
-        <div class="backup-info">Letztes Backup vor <i><?php echo sprintf( '%s Tag%s', $age, 1 !== $age ? 'en' : '' ); ?></i><?php echo ' (' . $date . ')'; ?></div>
+        <div class="backup-info"><?php echo $text; ?></div>
     </header>
 </div>
 <script type="text/javascript">
