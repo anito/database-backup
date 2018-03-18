@@ -285,5 +285,5 @@ function get_time_diff( $time, $time_unit = "d" ) {
 			$unit_name = sprintf( 'Minute%s', 1 !== $total ? 'n' : ''  );
 			break;
 	}
-	return array( 'total' => round($total, 0, PHP_ROUND_HALF_UP), 'name' => $unit_name );
+	return array( 'total' => round($total, 0, PHP_ROUND_HALF_DOWN), 'name' => $unit_name );
 }
