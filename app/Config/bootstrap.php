@@ -196,7 +196,7 @@ function returnExt($file) {
     return strtolower(substr($file, $pos + 1, strlen($file)));
 }
 
-function l($sort, $fullpath = FALSE, $human) {
+function l( $human = FALSE, $sort = SORT_DESC, $fullpath = '' ) {
     App::uses('CakeTime', 'Utility');
     $time = array();
     $path = MYSQLUPLOAD . DS . '*.*';

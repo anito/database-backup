@@ -264,7 +264,7 @@ class UsersController extends AppController {
     public function lastSaved( $human = FALSE ) {
         $this->layout = false;
         
-        $files = l(SORT_DESC, FALSE, $human);
+        $files = l($human);
         reset( $files );
         $first = current($files);
         $this->set('content', $first );

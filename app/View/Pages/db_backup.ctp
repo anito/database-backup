@@ -19,14 +19,14 @@ if (Configure::read('debug') == 0):
 //throw new NotFoundException();
 endif;
 
-$files_human   = l(SORT_DESC);
+$files_human   = l(TRUE); // get readable time format e.g. 09. Apr 2018 10:38
 reset( $files_human );
 $date          = current($files_human);
 if( !$date ) {
     $date	= '<strong><span style="color: #f00;">Noch kein Backup vorhanden!</span></strong>';
     $text =  sprintf('Letztes Backup: %s ', $date );
 } else {
-    $files_raw     = l(SORT_DESC, FALSE, FALSE); // get UNIX-Timestamp
+    $files_raw     = l(); // get UNIX-Timestamp
     reset( $files_raw );
     $last_backup    = current($files_raw);
     if( ( $diff = get_time_diff( $last_backup, 'i' ) ) && ( $diff['total'] > 59 ) ) { // express in minutes
