@@ -261,11 +261,10 @@ class UsersController extends AppController {
     
     
     
-    public function lastSaved( $human ) {
+    public function lastSaved( $human = FALSE ) {
         $this->layout = false;
         
-        $h = isset($human ) ? TRUE : FALSE;
-        $files = l(SORT_DESC, FALSE, $h);
+        $files = l(SORT_DESC, FALSE, $human);
         reset( $files );
         $first = current($files);
         $this->set('content', $first );
