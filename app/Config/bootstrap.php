@@ -181,7 +181,7 @@ if (!defined('MAGICK_PATH')) {
     define('MAGICK_PATH_FINAL', MAGICK_PATH);
 }
 if (!defined('MAX_DUMPS')) {
-    define('MAX_DUMPS', 5);
+    define('MAX_DUMPS', 15);
 }
 
 function pre() {
