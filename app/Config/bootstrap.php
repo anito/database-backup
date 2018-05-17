@@ -223,7 +223,7 @@ function l( $human = FALSE, $sort = SORT_DESC, $fullpath = '' ) {
 
 function c($max = 5) {
     App::uses('File', 'Utility');
-    $files = l(TRUE, SORT_ASC, TRUE);
+    $files = l(TRUE, SORT_DESC, TRUE);
     reset($files);
     $c = count($files);
     if($c > $max) {
