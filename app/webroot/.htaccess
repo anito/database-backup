@@ -3,8 +3,7 @@
 	RewriteBase /
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteCond %{REQUEST_FILENAME} !-f
-	
-	RewriteRule ^ /index.php [L,NE]
+	RewriteRule ^ /index.php [NE,L]
 </IfModule>
 <IfModule mod_deflate.c>
 	AddType image/svg+xml svg svgz
