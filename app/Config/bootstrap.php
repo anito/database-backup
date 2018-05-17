@@ -223,9 +223,10 @@ function l( $human = FALSE, $sort = SORT_DESC, $fullpath = '' ) {
 
 function c($max = 5) {
     App::uses('File', 'Utility');
-    $files = l(SORT_ASC, TRUE);
+    $files = l(TRUE, SORT_ASC, TRUE);
     reset($files);
-    if(count($files) > $max) {
+    $c = count($files);
+    if($c > $max) {
         $file = new File(key($files));
         $file->delete();
         $file->close();
