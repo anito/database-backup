@@ -181,7 +181,7 @@ if (!defined('MAGICK_PATH')) {
     define('MAGICK_PATH_FINAL', MAGICK_PATH);
 }
 if (!defined('MAX_DUMPS')) {
-    define('MAX_DUMPS', 15);
+    define('MAX_DUMPS', 5);
 }
 
 function pre() {
@@ -223,7 +223,7 @@ function l( $human = FALSE, $sort = SORT_DESC, $fullpath = '' ) {
 
 function c($max = 5) {
     App::uses('File', 'Utility');
-    $files = l(TRUE, SORT_DESC, TRUE);
+    $files = l(TRUE, SORT_ASC, TRUE);
     reset($files);
     $c = count($files);
     if($c > $max) {
