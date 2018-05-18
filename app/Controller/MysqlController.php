@@ -45,8 +45,8 @@ class MysqlController extends AppController {
         $args = implode(' ', $this->passedArgs);
 
         if (!in_array($action, $allowed_actions)) {
-            $message = 'command not in list of allowed commands';
-            header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . $message . '&c=error'));
+            $message = 'Command not in list of allowed commands!';
+            header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . urlencode($message) . '&c=error'));
             die;
         }
 
@@ -62,14 +62,14 @@ class MysqlController extends AppController {
         if ($action == 'dump') {
             $postfix = MYSQL_CMD_PATH . 'mysqldump';
             $io = '>';
-            $message = urlencode('Datenbank erfolgreich gesichert');
+            $message = 'Datenbank erfolgreich gesichert';
             $fn = 'file_' . md5(date(time())) . '.sql';
         } elseif ($action == 'restore') {
             if (!empty($this->request->named['fn']) && !empty($this->request->ext) && $this->request->ext == 'sql') {
                 $fn = $this->request->named['fn'] . '.' . $this->request->ext;
                 $postfix = MYSQL_CMD_PATH . 'mysql';
                 $io = '<';
-                $message .= urlencode('Datenbank erfolgreich wiederhergestellt');
+                $message .= 'Datenbank erfolgreich wiederhergestellt';
             } else {
                 $message .= 'wrong file';
                 $result = 'error';
@@ -85,7 +85,7 @@ class MysqlController extends AppController {
         exec($cmd, $output, $return_var);# execute the command
         
         if($return_var) {
-            $message = "Sorry - irgendwas ist schief gelaufen :(";
+            $message = 'Sorry - irgendwas ist schief gelaufen :(';
             $result = "error";
             $exists = file_exists(MYSQLUPLOAD . '/file.sql');
             if(!$exists) {
@@ -102,7 +102,7 @@ class MysqlController extends AppController {
         if ($action == "dump") {
             c(MAX_DUMPS); #cleanup older dump files
         }
-        header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . $message . '&c=' . $result));
+        header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . urlencode($message . '&c=' . $result)));
         die;
     }
     
