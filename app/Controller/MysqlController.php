@@ -62,14 +62,14 @@ class MysqlController extends AppController {
         if ($action == 'dump') {
             $postfix = MYSQL_CMD_PATH . 'mysqldump';
             $io = '>';
-            $message = 'Datenbank erfolgreich gesichert';
+            $message = urlencode('Datenbank erfolgreich gesichert');
             $fn = 'file_' . md5(date(time())) . '.sql';
         } elseif ($action == 'restore') {
             if (!empty($this->request->named['fn']) && !empty($this->request->ext) && $this->request->ext == 'sql') {
                 $fn = $this->request->named['fn'] . '.' . $this->request->ext;
                 $postfix = MYSQL_CMD_PATH . 'mysql';
                 $io = '<';
-                $message .= 'Datenbank erfolgreich wiederhergestellt';
+                $message .= urlencode('Datenbank erfolgreich wiederhergestellt');
             } else {
                 $message .= 'wrong file';
                 $result = 'error';
