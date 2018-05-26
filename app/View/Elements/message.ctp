@@ -1,13 +1,10 @@
 <?php
 $class = 'info-sign';
-$message = '';
 
-if (!empty($params['c']) && $params['c'] == "success") {
+if (!empty($result) && $result == "success") {
     $class = 'ok';
 }
-if (!empty($params['m'])) {
-    $message .= $params['m'];
-}
+$message = !empty($message) ? $message : '';
 
 ?>
 <i class="glyphicon glyphicon-<?php echo h($class); ?>"></i>

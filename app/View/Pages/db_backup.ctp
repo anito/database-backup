@@ -42,6 +42,7 @@ if( !$date ) {
     $text   = sprintf( 'Letztes Backup vor <i>%s</i><span style="opacity: 0.5;"> am %s</span>', $age, $date );
 }
 ?>
+<?php $ret = isset($this->request->query['ret']) ? $this->request->query['ret'] : ''; ?>
 <div itemscope itemtype="http://schema.org/SoftwareApplication" class="container">
     <header class="jumbotron masthead">
         <div class="inner">
@@ -55,7 +56,7 @@ if( !$date ) {
                                 'id'        => 'opt-dump',
                                 'title'       => 'aktuellen Datenstand sichern',
                                 'href'      => '#',
-                                'data-href' => DIR_HOST.'/mysql/dump',
+                                'data-href' => DIR_HOST.'/mysql/dump?ret=' . urlencode($ret),
                                 'onclick'   => "jQuery.ask('dump', this); return false;",
                                 'class'     => array('btn', 'btn-warning', 'btn-large'), 
                                 'target'    => "_self",
@@ -89,7 +90,7 @@ if( !$date ) {
                                                 'id'        => 'opt-restore',
                                                 'title'     => 'ausgewählten Datenstand wiedererstellen',
                                                 'href'      => '#',
-                                                'data-href' => DIR_HOST.'/mysql/restore',
+                                                'data-href' => DIR_HOST.'/mysql/restore?ret=' . urlencode($ret),
                                                 'onclick'   => 'jQuery.ask(\'restore\', this); return false;',
                                                 'class'     => array('btn', 'btn-danger', 'btn-large'),
                                                 'target'    => "_self",
@@ -145,10 +146,8 @@ if( !$date ) {
                 return;
 
             if (window.confirm(res)) {
-                var data = $(me).data();
-                console.log($(me).data());
-                
-                window.location.href = data['href'] + '/fn:' + data['fn'];
+                var data = $(me).data(), fn;
+                window.location.href = data['href'] + ( ( fn = data['fn'] ) ? '&fn=' + fn : '');
             } else {
                 alert("Vorgang abgebrochen")
             }

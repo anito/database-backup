@@ -10,6 +10,7 @@ class UsersController extends AppController {
     public $helpers = array('Form');
 
     function beforeFilter() {
+        
         $this->Auth->allowedActions = array('login', 'logout', 'ping', 'lastSaved'); //, 'add', 'index', 'edit', 'view');
         $this->allowedGroups = array('Administrators', 'Managers');
         $this->layout = 'cake';
@@ -43,9 +44,11 @@ class UsersController extends AppController {
     }
 
     function login() {
-        if ($this->request->is('ajax')) {
-
+        if( $this->request->is('post') || $this->request->is('ajax') ) {
+//            $this->log($this->request->is('ajax'), LOG_DEBUG);
             if (!empty($this->data)) {
+//                $this->log('$this->data', LOG_DEBUG);
+//                $this->log($this->data, LOG_DEBUG);
                 if ($this->Auth->login() && $this->isAuthGroup()) {
                     $this->User->id = $this->Auth->user('id');
                     $this->User->saveField('lastlogin', date('Y-m-d H:i:s'));
@@ -78,6 +81,7 @@ class UsersController extends AppController {
             $this->set('redirect', $this->Auth->redirect(array('controller' => 'users', 'action' => 'index')));
             $this->layout = 'login_layout';
         }
+        
     }
 
     function logout() {

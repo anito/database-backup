@@ -58,20 +58,22 @@ class MysqlController extends AppController {
         $dsc = $ds->config;
         $db = $dsc['database'];
         $message = '';
-
+        $ret = $this->request->query('ret');
         if ($action == 'dump') {
             $postfix = MYSQL_CMD_PATH . 'mysqldump';
             $io = '>';
-            $message = 'Datenbank erfolgreich gesichert';
+            $message = 'Hooray, Datenbank wurde erfolgreich gesichert';
             $fn = 'file_' . md5(date(time())) . '.sql';
         } elseif ($action == 'restore') {
-            if (!empty($this->request->named['fn']) && !empty($this->request->ext) && $this->request->ext == 'sql') {
-                $fn = $this->request->named['fn'] . '.' . $this->request->ext;
+            $fn = $this->request->query('fn');
+            if ( !empty( $fn ) ) {
                 $postfix = MYSQL_CMD_PATH . 'mysql';
                 $io = '<';
-                $message .= 'Datenbank erfolgreich wiederhergestellt';
+                $message .= 'Hooray, Datenbank wurde erfolgreich wiederhergestellt';
             } else {
-                $message .= 'wrong file';
+                $postfix = '';
+                $io = '<';
+                $message .= 'Wrong file';
                 $result = 'error';
             }
         } else {
@@ -87,14 +89,6 @@ class MysqlController extends AppController {
         if($return_var) {
             $message = 'Sorry - irgendwas ist schief gelaufen :(';
             $result = "error";
-            $exists = file_exists(MYSQLUPLOAD . '/file.sql');
-            if(!$exists) {
-                $message .= 'No MySQL dump file found';
-            } else {
-                $chars = array("\n", "\r");
-                $file = new File(MYSQLUPLOAD . '/file.sql');
-                $message .= str_replace($chars, "", $file->read());
-            }
         } else {
             $result = "success";
         }
@@ -102,7 +96,7 @@ class MysqlController extends AppController {
         if ($action == "dump") {
             c(MAX_DUMPS); #cleanup older dump files
         }
-        header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . urlencode($message) . '&c=' . $result));
+        header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . urlencode($message) . '&c=' . $result . '&ret=' . urlencode($ret) ));
         die;
     }
     
@@ -121,13 +115,15 @@ class MysqlController extends AppController {
             $path = MYSQLUPLOAD . DS . $fn;
             $files = glob($path);
             $fn = basename($files[0]);
+            $ret = $this->request->query('ret');
+            
             if(!empty($files[0])) {
                 $options = compact(array('uid', 'fn'));
                 $file = p($options);
             } else {
                 $message = 'kein Download verfügbar';
                 $result = 'error';
-                header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . $message . '&c=' . $result));
+                header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . urlencode($message) . '&c=' . $result . '&ret=' . urlencode($ret) ));
                 die;
             }
         } else {
