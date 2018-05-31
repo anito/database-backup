@@ -275,7 +275,7 @@ function get_time_diff( $time, $time_unit = "d" ) {
 			break;
 		case "d":
 			$total = $diff->y * 365.25 + $diff->m * 30 + $diff->d + $diff->h/24 + $diff->i/60;
-			$unit_name = sprintf( 'Tag%s', 1 !== $total ? 'en' : ''  );
+			$unit_name = sprintf( 'Tag%s', 1 < $total ? 'en' : ''  );
 			break;
 		case "h":
 			$total = ($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h + $diff->i/60;
