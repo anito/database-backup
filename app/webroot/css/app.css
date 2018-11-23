@@ -11,7 +11,7 @@
 body {
   position: relative;
   padding-top: 90px;
-  background-color: #fff;
+  background-color: #eee;
   background-repeat: repeat-x;
   background-position: 0 0;
 }
@@ -90,12 +90,14 @@ i.info {
   text-align: center;
 }
 .backup-info {
-    font-size: 0.5em;
-    padding: 0 1em;
+    font-size: 1em;
+    margin-top: 2em;
     width: 100%;
     text-align: center;
 }
-
+.backup-info span {
+    opacity: 0.5;
+}
 .backup-info > i {
     font-weight: 400;
     padding: .3em .5em;
@@ -628,7 +630,6 @@ form.well {
     margin-right: 0;
   }
   .jumbotron h1 {
-    font-size: 45px;
     margin-right: 0;
     padding: 20px;
   }

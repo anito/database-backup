@@ -39,11 +39,12 @@ if( !$date ) {
         }
     }
     $age    = $diff['total'] . ' ' . $diff['name'];
-    $text   = sprintf( 'Letztes Backup vor <i>%s</i><span style="opacity: 0.5;"> am %s</span>', $age, $date );
+    $text   = sprintf( '<span>Letztes Backup vor </span><i>%s</i><span> am %s</span>', $age, $date );
 }
 ?>
 <?php $ret = isset($this->request->query['ret']) ? $this->request->query['ret'] : ''; ?>
 <div itemscope itemtype="http://schema.org/SoftwareApplication" class="container">
+    <div class="backup-info"><?php echo $text; ?></div>
     <header class="jumbotron masthead">
         <div class="inner">
             <h1>Datenbank</h1>
@@ -126,7 +127,6 @@ if( !$date ) {
                 </table>
             </form>
         </div>
-        <div class="backup-info"><?php echo $text; ?></div>
     </header>
 </div>
 <script type="text/javascript">
