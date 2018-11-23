@@ -46,8 +46,7 @@ if( !$date ) {
 <div itemscope itemtype="http://schema.org/SoftwareApplication" class="container">
     <header class="jumbotron masthead">
         <div class="inner">
-            <h1></h1>
-            <p>Datenbank</p>
+            <h1>Datenbank</h1>
             <?php echo $this->Form->create('User', array('url' => '/u')); ?>
                 <table class="download-info button-wrap">
                     <tr style="text-align: center">

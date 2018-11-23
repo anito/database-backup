@@ -91,11 +91,10 @@ i.info {
   text-align: center;
 }
 .backup-info {
-    position: absolute;
-    right: 0;
-    top: 8px;
     font-size: 0.5em;
     padding: 0 1em;
+    width: 100%;
+    text-align: center;
 }
 
 .backup-info > i {
@@ -632,6 +631,7 @@ form.well {
   .jumbotron h1 {
     font-size: 45px;
     margin-right: 0;
+    padding: 20px;
   }
   .jumbotron p {
     margin-right: 0;
