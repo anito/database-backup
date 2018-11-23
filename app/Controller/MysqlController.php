@@ -62,7 +62,7 @@ class MysqlController extends AppController {
         if ($action == 'dump') {
             $postfix = MYSQL_CMD_PATH . 'mysqldump';
             $io = '>';
-            $message = 'Hooray, Datenbank wurde erfolgreich gesichert';
+            $message = 'Hooray - Datenbank wurde erfolgreich gesichert';
             $fn = 'file_' . md5(date(time())) . '.sql';
         } elseif ($action == 'restore') {
             $fn = $this->request->query('fn');
