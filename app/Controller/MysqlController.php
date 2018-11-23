@@ -96,7 +96,7 @@ class MysqlController extends AppController {
         if ($action == "dump") {
             c(MAX_DUMPS); #cleanup older dump files
         }
-        header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . urlencode($message) . '&c=' . $result . '&ret=' . urlencode($ret) ));
+        header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . rawurlencode($message) . '&c=' . $result . '&ret=' . urlencode($ret) ));
         die;
     }
     
