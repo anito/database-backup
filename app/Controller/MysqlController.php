@@ -69,7 +69,7 @@ class MysqlController extends AppController {
             if ( !empty( $fn ) ) {
                 $postfix = MYSQL_CMD_PATH . 'mysql';
                 $io = '<';
-                $message .= 'Hooray, Datenbank wurde erfolgreich wiederhergestellt';
+                $message .= 'Hooray - Datenbank wurde erfolgreich wiederhergestellt';
             } else {
                 $postfix = '';
                 $io = '<';
@@ -87,7 +87,7 @@ class MysqlController extends AppController {
         exec($cmd, $output, $return_var);# execute the command
         
         if($return_var) {
-            $message = 'Sorry - irgendwas ist schief gelaufen :(';
+            $message = 'Sorry - etwas ist schief gelaufen :(';
             $result = "error";
         } else {
             $result = "success";
