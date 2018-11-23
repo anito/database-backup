@@ -98,7 +98,7 @@ class MysqlController extends AppController {
         }
         
         $message = strip_tags( $message );
-        header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . rawurlencode($message) . '&c=' . $result . '&ret=' . urlencode($ret) ));
+        header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . urlencode($message) . '&c=' . $result . '&ret=' . urlencode($ret) ));
         die;
     }
     
