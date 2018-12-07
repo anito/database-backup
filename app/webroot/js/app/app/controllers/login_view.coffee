@@ -13,6 +13,9 @@ class LoginView extends Spine.Controller
     
   constructor: ->
     super
+    @bind('active', @proxy @active)
+    
+  active: ->
     
   template: ->
     $('#loginTemplate').tmpl

@@ -46,6 +46,7 @@ if( !$date ) {
 <div itemscope itemtype="http://schema.org/SoftwareApplication" class="container">
     <div class="backup-info"><?php echo $text; ?></div>
     <header class="jumbotron masthead">
+        <div class="badge-logo"></div>
         <div class="inner">
             <h1>Datenbank</h1>
             <?php echo $this->Form->create('User', array('url' => '/u')); ?>

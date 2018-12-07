@@ -47,12 +47,13 @@ class UsersController extends AppController {
         if( $this->request->is('post') || $this->request->is('ajax') ) {
 //            $this->log($this->request->is('ajax'), LOG_DEBUG);
             if (!empty($this->data)) {
-//                $this->log('$this->data', LOG_DEBUG);
+//                $this->log('$this->data:', LOG_DEBUG);
 //                $this->log($this->data, LOG_DEBUG);
+                $this->Auth->logout();
                 if ($this->Auth->login() && $this->isAuthGroup()) {
                     $this->User->id = $this->Auth->user('id');
                     $this->User->saveField('lastlogin', date('Y-m-d H:i:s'));
-                    $this->Flash->success(__('Erfolgreich angemeldet als ' . $this->Auth->user('name')));
+                    $this->Flash->success(sprintf( 'angemeldet als <strong>%s</strong>', $this->Auth->user('name') ) );
                     $this->set('_serialize', array_merge($this->data['User'], array(
                         'id' => $this->Auth->user('id'),
                         'username' => $this->Auth->user('username'),
@@ -64,8 +65,7 @@ class UsersController extends AppController {
                         'redirect' => $this->data['User']['redirect']
                     )));
                 } else {
-                    $this->Auth->logout();
-                    $this->Flash->error(__('Login fehlgeschlagen'));
+                    $this->Flash->error(__('Anmeldung fehlgeschlagen'));
                     $this->response->header("WWW-Authenticate: Negotiate");
                     $this->set('_serialize', array_merge($this->data['User'], array(
                         'id' => '',
@@ -78,8 +78,10 @@ class UsersController extends AppController {
                 $this->render(FLASH_JSON);
             }
         } else {
+            // set var $redirect for the view
             $this->set('redirect', $this->Auth->redirect(array('controller' => 'users', 'action' => 'index')));
             $this->layout = 'login_layout';
+//            $this->render('/Users/login_old');
         }
         
     }
@@ -87,12 +89,10 @@ class UsersController extends AppController {
     function logout() {
         $this->Auth->logout();
         if (!$this->request->is('ajax')) {
-//    $this->log($this->Session->id());
-            $this->Flash->error(__('Anmeldung erforderlich'));
+//            $this->Flash->error(__('Anmeldung erforderlich'));
             $this->redirect(array('controller' => 'users', 'action' => 'login'));
         } else {
             $this->Flash->success(__('Sie wurden ausgelogged'));
-//      $this->redirect(array('controller' => 'users', 'action' => 'login'));
             $json = array_merge($this->data, array('id' => '', 'username' => '', 'name' => '', 'password' => '', 'sessionid' => ''));
             $this->set('_serialize', $json);
             $this->render(FLASH_JSON);

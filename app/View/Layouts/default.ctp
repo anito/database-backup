@@ -27,17 +27,17 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	</title>
 	<?php
     echo $this->Html->meta(array('name' => 'viewport', 'content'=> 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1'));
-		echo $this->Html->meta('http-equiv', "x-ua-compatible");
-		echo $this->Html->meta('icon');
+    echo $this->Html->meta('http-equiv', "x-ua-compatible");
+    echo $this->Html->meta('icon');
 
     echo $this->Html->css('twitter/bootstrap/css/bootstrap');
-		echo $this->Html->css('bootstrap_glyphicons');
-		echo $this->Html->css('app');
+    echo $this->Html->css('bootstrap_glyphicons');
+    echo $this->Html->css('app');
     echo $this->Html->script('app/lib/jquery/jquery-latest.min');
     
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
+    echo $this->fetch('meta');
+    echo $this->fetch('css');
+    echo $this->fetch('script');
 	?>
 </head>
 <body class="">

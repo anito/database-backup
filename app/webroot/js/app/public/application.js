@@ -5065,7 +5065,10 @@ Released under the MIT License
 
     function LoginView() {
       LoginView.__super__.constructor.apply(this, arguments);
+      this.bind('active', this.proxy(this.active));
     }
+
+    LoginView.prototype.active = function() {};
 
     LoginView.prototype.template = function() {
       return $('#loginTemplate').tmpl({
@@ -18026,7 +18029,7 @@ Released under the MIT License
 
 }).call(this);
  },"login": function(exports, require, module) { (function() {
-  var $, Flash, Login, Spine, User,
+  var $, Flash, LoaderView, Login, LoginView, Spine, User,
     bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     extend = function(child, parent) { for (var key in parent) { if (hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     hasProp = {}.hasOwnProperty;
@@ -18035,9 +18038,15 @@ Released under the MIT License
 
   $ = Spine.$;
 
+  LoginView = require("controllers/login_view");
+
+  LoaderView = require("controllers/loader_view");
+
   Flash = require("models/flash");
 
   User = require("models/user");
+
+  require('spine/lib/manager');
 
   Login = (function(superClass) {
     extend(Login, superClass);
@@ -18048,8 +18057,9 @@ Released under the MIT License
       '.status': 'statusEl',
       '#UserPassword': 'passwordEl',
       '#UserUsername': 'usernameEl',
-      '#login .dialogue-content': 'contentEl',
-      '#loader': 'loader',
+      '#login .container': 'contentEl',
+      '#login': 'loginEl',
+      '#loader': 'loaderEl',
       '.guest': 'btnGuest'
     };
 
@@ -18074,6 +18084,12 @@ Released under the MIT License
       this.submit = bind(this.submit, this);
       var flash;
       Login.__super__.constructor.apply(this, arguments);
+      this.loginView = new LoginView({
+        el: this.loginEl
+      });
+      this.loaderView = new LoaderView({
+        el: this.loaderEl
+      });
       Flash.fetch();
       if (Flash.count()) {
         flash = Flash.first();
@@ -18082,6 +18098,8 @@ Released under the MIT License
         this.flash(flash);
       }
       Flash.destroyAll();
+      this.appManager = new Spine.Manager(this.loginView, this.loaderView);
+      this.loginView.trigger('active');
       this.renderGuestLogin();
     }
 
@@ -18091,6 +18109,7 @@ Released under the MIT License
     };
 
     Login.prototype.submit = function() {
+      this.log('test');
       return $.ajax({
         data: this.form.serialize(),
         type: 'POST',
@@ -18103,12 +18122,13 @@ Released under the MIT License
     Login.prototype.complete = function(xhr) {
       var json;
       json = xhr.responseText;
+      this.log(this.passwordEl.val());
       this.passwordEl.val('');
       return this.usernameEl.val('').focus();
     };
 
     Login.prototype.success = function(json) {
-      var fadeFunc, redirectFunc, user;
+      var fadeFunc, redirectFunc, switchViewFunc, user;
       json = $.parseJSON(json);
       User.fetch();
       User.destroyAll();
@@ -18116,14 +18136,17 @@ Released under the MIT License
       user.save();
       this.flash(json);
       fadeFunc = function() {
-        return this.contentEl.addClass('fade');
+        this.contentEl.addClass('fade');
+        return this.delay(switchViewFunc, 500);
+      };
+      switchViewFunc = function() {
+        this.loaderView.trigger('active');
+        return this.delay(redirectFunc, 2000);
       };
       redirectFunc = function() {
-        this.log('redirect: admin' + location.hash);
         return User.redirect('');
       };
-      this.delay(fadeFunc, 2000);
-      return this.delay(redirectFunc, 2000);
+      return this.delay(fadeFunc, 1000);
     };
 
     Login.prototype.error = function(xhr, err) {
