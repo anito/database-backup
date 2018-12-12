@@ -21,10 +21,12 @@ class User extends AppModel {
     //The Associations below have been created with all possible keys, those that are not needed can be removed
 
     public function beforeSave($options = array()) {
-        if (!empty($this->data[$this->alias]['password'])) {
+        $this->log($this->alias, LOG_DEBUG);
+        $this->log($this->data, LOG_DEBUG);
+        if (!empty($this->data[$this->alias]['pwd'])) {
             $passwordHasher = new BlowfishPasswordHasher();
             $this->data[$this->alias]['password'] = $passwordHasher->hash(
-                    $this->data[$this->alias]['password']
+                    $this->data[$this->alias]['pwd']
             );
         }
         return true;
@@ -34,7 +36,19 @@ class User extends AppModel {
         'username' => array(
             'rule' => 'isUnique',
             'message' => 'This username has already been taken.'
-        )
+        ),
+        'pwd' => array(
+            'rule' => array('minLength', '5'),
+            'message' => 'Minimum 5 characters long',
+            'allowEmpty' => true,
+            'on' => 'update'
+        ),
+        'pwd_repeat' => array(
+            'rule' => array('minLength', '5'),
+            'message' => 'Minimum 5 characters long',
+            'allowEmpty' => true,
+            'on' => 'update'
+        ),
     );
 
     /**

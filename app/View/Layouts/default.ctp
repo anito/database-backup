@@ -32,8 +32,15 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 
     echo $this->Html->css('twitter/bootstrap/css/bootstrap');
     echo $this->Html->css('bootstrap_glyphicons');
+//    echo $this->Html->css('um-styles');
     echo $this->Html->css('app');
     echo $this->Html->script('app/lib/jquery/jquery-latest.min');
+    echo $this->Html->script('settings');
+//    echo $this->Html->script('select2.full.min');
+//    echo $this->Html->script('um-scripts');
+//    echo $this->Html->script('um-tipsy');
+//    echo $this->Html->script('um-raty');
+//    echo $this->Html->script('um-profile');
     
     echo $this->fetch('meta');
     echo $this->fetch('css');

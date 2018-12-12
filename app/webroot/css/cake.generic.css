@@ -81,7 +81,7 @@ p {
 }
 #header h1 {
 	line-height:20px;
-	background: #003d4c url('../img/cake.icon.png') no-repeat left;
+	background: #003d4c;
 	color: #fff;
 	padding: 0 30px;
 }
@@ -455,7 +455,7 @@ p.error,
 	background-image: linear-gradient(top, #ee5f5b, #c43c35);
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
-.success {
+.success, .actions ul li .success, .actions ul li .success:hover {
 	clear: both;
 	color: #fff;
 	border: 1px solid rgba(0, 0, 0, 0.5);
@@ -468,6 +468,9 @@ p.error,
 	background-image: -o-linear-gradient(top, #76BF6B, #3B8230);
 	background-image: linear-gradient(top, #76BF6B, #3B8230);
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+.actions ul li .success, .actions ul li .success:hover {
+    margin-bottom: 0;
 }
 p.error {
 	font-family: Monaco, Consolas, Courier, monospace;

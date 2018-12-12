@@ -43,6 +43,7 @@ class PagesController extends AppController {
 
         $this->autoRender = true;
         $this->Auth->allow('');
+        $this->set('user', $this->Auth->user());
     }
 
     /**

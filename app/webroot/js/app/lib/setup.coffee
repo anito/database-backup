@@ -1,4 +1,5 @@
 require('lib/array')
+require('lib/settings')
 require('spine')
 require('spine/lib/local')
 require('spine/lib/manager')

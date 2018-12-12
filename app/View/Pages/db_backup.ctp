@@ -118,11 +118,34 @@ if( !$date ) {
                         </td>
                     </tr>
                     <tr style="text-align: center">
-                        <td colspan="2">
+                        <td colspan="1">
                             <a href="<?php echo DIR_HOST; ?>/logout" class="btn btn-success btn-large" type="submit" target="_self" tabindex="4">
                                 <i class="glyphicon glyphicon-log-out"></i>
                                 <span itemprop="name">Logout</span>
                             </a>
+                            <div class="settings settings-edit trigger-menu-on-click">
+                                <a class="dropdown">
+                                    <i class="glyphicon glyphicon-cog"></i>
+                                </a>
+                                <div class="settings-dropdown">
+                                    <div class="settings-dropdown-b">
+                                        <div class="settings-dropdown-arr">
+                                            <i class="glyphicon glyphicon-chevron-up"></i>
+                                        </div>
+                                        <ul>
+                                            <li>
+                                                <a href="<?php echo sprintf('/users/edit/%s', $user['id']); ?>" target="_self" class="settings">Einstellungen</a>
+                                            </li>
+                                            <li>
+                                                <hr>
+                                            </li>
+                                            <li>
+                                                <a href="#" class="settings-dropdown-hide">Abbrechen</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 </table>

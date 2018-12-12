@@ -31,14 +31,6 @@ class UsersController extends AppController {
         }
     }
 
-    function isAuthGroup() {
-        $groups = $this->allowedGroups;
-        if (in_array($this->_groupName(), $groups)) {
-            return TRUE;
-        }
-        return FALSE;
-    }
-
     function ajax_login() {
         
     }
@@ -115,6 +107,8 @@ class UsersController extends AppController {
             $this->redirect(array('action' => 'login'));
         }
         $this->User->recursive = 0;
+        $this->set('loggedin_user', $this->Auth->user() );
+        $this->set('isAdmin', $this->isAdmin());
         $this->set('users', $this->paginate());
     }
 
@@ -131,6 +125,7 @@ class UsersController extends AppController {
     }
 
     function add() {
+        $this->allowedGroups = array('Administrators');
         if (!$this->isAuthGroup()) {
             $this->log('no Authgroup: add');
             $this->redirect(array('action' => 'login'));
@@ -174,17 +169,18 @@ class UsersController extends AppController {
         }
         if (!empty($this->data)) {
             if ($this->User->save($this->request->data)) {
-                $this->Flash->success(__('The user has been saved', true));
+                $this->Flash->success(__('Erfolgreich gesichert', true));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Flash->eror(__('The user could not be saved. Please, try again.', true));
+                $this->Flash->error(__('The user could not be saved. Please, try again.', true));
             }
         }
         if (empty($this->request->data)) {
             $this->request->data = $this->User->read(null, $id);
         }
         $groups = $this->User->Group->find('list');
-        $this->set(compact('groups'));
+        $isAdmin = $this->isAdmin();
+        $this->set(compact('groups', 'isAdmin'));
     }
 
     function delete($id = null) {

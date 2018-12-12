@@ -96,5 +96,21 @@ class AppController extends Controller {
         }
         return $out;
     }
+    
+    function isAuthGroup() {
+        $groups = $this->allowedGroups;
+        if (in_array($this->_groupName(), $groups)) {
+            return TRUE;
+        }
+        return FALSE;
+    }
+    
+    function isAdmin() {
+        $group = 'Administrators';
+        if ( $this->_groupName() == $group ) {
+            return TRUE;
+        }
+        return FALSE;
+    }
 
 }
