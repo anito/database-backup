@@ -1,4 +1,16 @@
 <?php $this->Html->css("cake.generic", null, array('inline' => false)); ?>
+<div class="actions">
+	<h3><?php echo __('Aktionen'); ?></h3>
+	<ul>
+		<li><?php echo $this->Html->link(__('Logout'), '/logout', array('class' => 'success')); ?> </li>
+        <?php if( ( $loggedin_user['Group']['name'] == 'Administrators' ) || ( $loggedin_user['id'] == $user['User']['id'] ) ) : ?>
+        <li><?php echo $this->Html->link(__('Neuer Benutzer'), array('action' => 'add')); ?></li>
+        <li><?php echo $this->Html->link(__('Alle Gruppen'), array('controller' => 'groups', 'action' => 'index')); ?> </li>
+        <li><?php echo $this->Html->link(__('Neue Gruppe'), array('controller' => 'groups', 'action' => 'add')); ?> </li>
+        <?php endif; ?>
+        <li><?php echo $this->Html->link(__('Beenden'), '/', array('class' => 'success')); ?> </li>
+	</ul>
+</div>
 <div class="users index">
 	<h2><?php echo __('Benutzer');?></h2>
 	<table cellpadding="0" cellspacing="0">
@@ -47,16 +59,4 @@
         echo $this->Html->link(__('Abbrechen'), '/', array('class' => ''));
 	?>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php echo __('Aktionen'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Logout'), '/logout', array('class' => 'success')); ?> </li>
-        <?php if( ( $loggedin_user['Group']['name'] == 'Administrators' ) || ( $loggedin_user['id'] == $user['User']['id'] ) ) : ?>
-        <li><?php echo $this->Html->link(__('Neuer Benutzer'), array('action' => 'add')); ?></li>
-        <li><?php echo $this->Html->link(__('Alle Gruppen'), array('controller' => 'groups', 'action' => 'index')); ?> </li>
-        <li><?php echo $this->Html->link(__('Neue Gruppe'), array('controller' => 'groups', 'action' => 'add')); ?> </li>
-        <?php endif; ?>
-        <li><?php echo $this->Html->link(__('Beenden'), '/', array('class' => 'success')); ?> </li>
-	</ul>
 </div>
