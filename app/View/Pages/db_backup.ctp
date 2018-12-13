@@ -137,9 +137,6 @@ if( !$date ) {
                                                 <a href="<?php echo sprintf('/users/edit/%s', $user['id']); ?>" target="_self" class="settings">Einstellungen</a>
                                             </li>
                                             <li>
-                                                <hr>
-                                            </li>
-                                            <li>
                                                 <a href="#" class="settings-dropdown-hide">Abbrechen</a>
                                             </li>
                                         </ul>

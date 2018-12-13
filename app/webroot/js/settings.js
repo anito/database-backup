@@ -7,8 +7,8 @@ jQuery(document).ready(function() {
         dd = el.find('.settings-dropdown');
         
         dd.css({
-            'top' : '35',
-            'left' : ( el.width() / 2 ) - dd.width() / 2 - 17,
+            'top' : '35px',
+            'left' : ( el.width() / 2 ) - dd.width() / 2,
             'right' : 'auto'
         });
         
@@ -18,7 +18,7 @@ jQuery(document).ready(function() {
         var el = jQuery(this);
         
         el.find('.settings-dropdown-arr').css({
-            'top' : '-30',
+            'top' : '-13px',
             'left' : ( el.width() / 2 ) - 12,
             'right' : 'auto'
         });
@@ -29,16 +29,16 @@ jQuery(document).ready(function() {
 		jQuery(this).addClass('active');
 	});
     
-    jQuery(document).on('click touchstart', '.trigger-menu-on-click touchstart', function(e) {
+    jQuery(document).on('click touchstart', '.trigger-menu-on-click', function(e) {
         jQuery('.settings-dropdown').hide();
         menu = jQuery(this).find('.settings-dropdown');
         menu.show();
-//        return false;
+        e.stopPropagation();
     });
     
     jQuery(document).on('click touchstart', '.settings-dropdown-hide', function(e) {
         jQuery('.settings-dropdown').hide();
-        return false;
+        e.stopPropagation();
     });
     
 });

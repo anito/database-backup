@@ -642,7 +642,6 @@ form.well {
  * Settings
  */
 .settings {
-    margin: 10px;
     position: relative;
 }
 .settings-dropdown {
@@ -651,7 +650,7 @@ form.well {
     height: auto;
     font-size: 0.8em;
     line-height: 1.5em;
-    padding: 1em;
+    padding: 0;
     background: #fff;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -668,9 +667,16 @@ form.well {
 }
 .settings-dropdown ul, .settings-dropdown li {
     list-style-type: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
+    margin-bottom: 0;
+    padding: 0;
     white-space: nowrap;
+}
+.settings-dropdown li a {
+    display: block;
+    padding: 7px 11px;
+}
+.settings-dropdown li:last-child {
+    border-top: 1px solid #ddd;
 }
 .settings-dropdown-arr {
     position: absolute;
