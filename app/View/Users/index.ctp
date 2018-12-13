@@ -3,7 +3,7 @@
 	<h3><?php echo __('Aktionen'); ?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('Logout'), '/logout', array('class' => 'success')); ?> </li>
-        <?php if( ( $loggedin_user['Group']['name'] == 'Administrators' ) || ( $loggedin_user['id'] == $user['User']['id'] ) ) : ?>
+        <?php if( ( $loggedin_user['Group']['name'] == 'Administrators' ) ) : ?>
         <li><?php echo $this->Html->link(__('Neuer Benutzer'), array('action' => 'add')); ?></li>
         <li><?php echo $this->Html->link(__('Alle Gruppen'), array('controller' => 'groups', 'action' => 'index')); ?> </li>
         <li><?php echo $this->Html->link(__('Neue Gruppe'), array('controller' => 'groups', 'action' => 'add')); ?> </li>

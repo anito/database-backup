@@ -164,19 +164,30 @@ class UsersController extends AppController {
             $this->redirect(array('action' => 'login'));
         }
         if (!$id && empty($this->data)) {
-            $this->Session->setFlash(__('Invalid user', true));
+            $this->Session->setFlash(__('Ungültiger Benutzer', true));
             $this->redirect(array('action' => 'index'));
         }
         if (!empty($this->data)) {
             if ($this->User->save($this->request->data)) {
-                $this->Flash->success(__('Erfolgreich gesichert', true));
-                $this->redirect(array('action' => 'index'));
+                $this->Flash->success(__('Erfolgreich gespeichert', true));
+                $this->redirect(array( 'action' => 'index' ));
             } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.', true));
+                $this->Flash->error(__('Benutzer konnte nicht gespeichert werden. Bitte versuchen sie es noch einmal', true));
             }
         }
         if (empty($this->request->data)) {
+            /*
+             * Iniatial Request
+             * 
+             */
             $this->request->data = $this->User->read(null, $id);
+        } else {
+            /*
+             * If validation failes after save
+             * we need to fill up empty form fields (don't call read since it manipulates $this->data, use findById instead !!)
+             */
+            $user = $this->User->findById($id);
+            $this->request->data['User'] = array_merge($this->request->data['User'], $user['User'] );
         }
         $groups = $this->User->Group->find('list');
         $isAdmin = $this->isAdmin();

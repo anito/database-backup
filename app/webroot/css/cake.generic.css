@@ -102,7 +102,6 @@ p {
 	color: #333;
 	padding: 10px 20px 40px 20px;
 	overflow: auto;
-    display: flex;
 }
 #footer {
 	clear: both;
@@ -121,11 +120,15 @@ div.index,
 div.view {
 	border-left:1px solid #666;
 	padding:10px 2%;
-    flex: 1 0 76%;
+	flex: 1 0 76%;
+	float: right;
+	width: 76%;
 }
 div.actions {
 	padding:10px 1.5%;
-    flex: 1 0 16%;
+	flex: 1 0 16%;
+	float: left;
+	width: 16%;
 }
 div.actions h3 {
 	padding-top:0;
@@ -742,4 +745,21 @@ pre {
 /** Elements **/
 #url-rewriting-warning {
 	display:none;
+}
+@media only screen and (max-width: 768px) {
+    
+    #content{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    div.form, div.index, div.view {
+        border-left: 0 none;
+        width: auto; 
+    }
+    
+    div.actions {
+        width: auto;
+    }
+    
 }

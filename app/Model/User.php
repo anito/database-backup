@@ -21,8 +21,8 @@ class User extends AppModel {
     //The Associations below have been created with all possible keys, those that are not needed can be removed
 
     public function beforeSave($options = array()) {
-        $this->log($this->alias, LOG_DEBUG);
-        $this->log($this->data, LOG_DEBUG);
+//        $this->log($this->alias, LOG_DEBUG);
+//        $this->log($this->data, LOG_DEBUG);
         if (!empty($this->data[$this->alias]['pwd'])) {
             $passwordHasher = new BlowfishPasswordHasher();
             $this->data[$this->alias]['password'] = $passwordHasher->hash(
@@ -43,12 +43,12 @@ class User extends AppModel {
             'allowEmpty' => true,
             'on' => 'update'
         ),
-        'pwd_repeat' => array(
-            'rule' => array('minLength', '5'),
-            'message' => 'Minimum 5 characters long',
+        'pwd_confirm' => array(
+            'rule' => 'matchpwd',
+            'message' => 'Passwort stimmt nicht überein',
             'allowEmpty' => true,
             'on' => 'update'
-        ),
+        )
     );
 
     /**
@@ -72,5 +72,19 @@ class User extends AppModel {
             'order' => ''
         )
     );
+
+    /*
+     * This method will be called to check password match
+     */
+    function matchpwd($data){
+        if ($this->data['User']['pwd']!=$data['pwd_confirm'] ) {
+            return false;
+        }
+        return true;
+    }
+    
+    public function beforeValidate($options = array()) {
+        return parent::beforeValidate($options);
+    }
 
 }

@@ -13,7 +13,7 @@ class Group extends AppModel {
  * @var string
  */
 	public $displayField = 'name';
- public $useDbConfig = 'default';
+    public $useDbConfig = 'default';
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
