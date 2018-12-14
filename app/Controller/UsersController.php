@@ -170,9 +170,9 @@ class UsersController extends AppController {
         if (!empty($this->data)) {
             if ($this->User->save($this->request->data)) {
                 $this->Flash->success(__('Erfolgreich gespeichert', true));
-                $this->redirect(array( 'action' => 'index' ));
+//                $this->redirect(array( 'action' => 'index' ));
             } else {
-                $this->Flash->error(__('Benutzer konnte nicht gespeichert werden. Bitte versuchen sie es noch einmal', true));
+                $this->Flash->error(__('Benutzer konnte nicht gespeichert werden. Bitte erneut versuchen.', true));
             }
         }
         if (empty($this->request->data)) {
