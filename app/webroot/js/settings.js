@@ -36,7 +36,7 @@ jQuery(document).ready(function() {
         e.stopPropagation();
     });
     
-    jQuery(document).on('click touchstart', '.settings-dropdown-hide', function(e) {
+    jQuery(document).on('click touchstart', '.settings-dropdown-hide, body', function(e) {
         jQuery('.settings-dropdown').hide();
         e.stopPropagation();
     });
