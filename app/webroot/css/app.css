@@ -687,6 +687,10 @@ form.well {
     overflow: hidden;
     z-index: 1;
 }
+/* Jumbotron buttons */
+.jumbotron .btn {
+    margin-bottom: 10px;
+}
 
 /* Responsive Docs
 -------------------------------------------------- */
