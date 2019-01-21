@@ -691,6 +691,9 @@ form.well {
 .jumbotron .btn {
     margin-bottom: 10px;
 }
+.filebox input {
+    padding: 0 8px;
+}
 
 /* Responsive Docs
 -------------------------------------------------- */
