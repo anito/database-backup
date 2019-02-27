@@ -47,12 +47,12 @@ body {
 }
 .badge-logo::before {
     content: "";
-    background-image: url(/img/logo_cropped_200_200.png);
-    background-size: 50px 50px;
+    background-image: url(/img/new_logo_cropped_200_200.png);
+    background-size: 80px 80px;
     background-repeat: no-repeat;
     display: inline-block;
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
 }
 
 /* Tweak navbar brand link to be super sleek
