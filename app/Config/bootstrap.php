@@ -302,9 +302,19 @@ function get_time_diff( $time, $time_unit = "d" ) {
 /*
  * Get Site specific Images, Logos & Favicons from config.ini
  */
-function logo_url() {
-    return IMAGES_URL . Configure::read( 'site.logo' );
+function logo_url( $output = FALSE ) {
+    $ret = BASE_URL . DS . IMAGES_URL . Configure::read( 'site.logo' );
+    if ($output) {
+        echo $ret;
+    } else {
+        return $ret;
+    }
 }
-function icon_url() {
-    return IMAGES_URL . Configure::read( 'site.favicon' );
+function icon_url( $output = FALSE ) {
+    $ret = BASE_URL . DS . IMAGES_URL . Configure::read( 'site.icon' );
+    if ($output) {
+        echo $ret;
+    } else {
+        return $ret;
+    } 
 }

@@ -28,12 +28,15 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	<?php
     echo $this->Html->meta(array('name' => 'viewport', 'content'=> 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1'));
     echo $this->Html->meta('http-equiv', "x-ua-compatible");
-    echo $this->Html->meta('icon', icon_url() );
+    echo $this->Html->meta('icon', icon_url() ); // -> bootstrap.php
 
     echo $this->Html->css('twitter/bootstrap/css/bootstrap');
     echo $this->Html->css('bootstrap_glyphicons');
 //    echo $this->Html->css('um-styles');
     echo $this->Html->css('app');
+    
+    echo $this->Html->style('.badge-logo::before {background-image: url(/img/new_logo_cropped_200_200.png}');
+    
     echo $this->Html->script('app/lib/jquery/jquery-latest.min');
     echo $this->Html->script('settings');
 //    echo $this->Html->script('select2.full.min');

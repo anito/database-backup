@@ -29,7 +29,7 @@ $cakeDescription = __d('cake_dev', 'Backup DB');
     <?php
     echo $this->Html->meta(array('name' => 'viewport', 'content'=> 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1'));
     echo $this->Html->meta('http-equiv', "x-ua-compatible");
-    echo $this->Html->meta('icon');
+    echo $this->Html->meta('icon', icon_url() ); // -> bootstrap.php
     
 //    echo $this->Html->css('bootstrap/css/bootstrap');
 //    echo $this->Html->css('application_boxmodel');

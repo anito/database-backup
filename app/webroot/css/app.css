@@ -47,7 +47,6 @@ body {
 }
 .badge-logo::before {
     content: "";
-    background-image: url(/img/new_logo_cropped_200_200.png);
     background-size: 80px 80px;
     background-repeat: no-repeat;
     display: inline-block;

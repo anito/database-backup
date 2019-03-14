@@ -4,57 +4,58 @@
         <div itemscope itemtype="http://schema.org/SoftwareApplication" class="container">
             <header class="jumbotron masthead">
                 <div class="inner container">
+                    <style>.badge-logo::before{background-image: url(<?php echo logo_url(); ?>)}'</style>
                     <div class="badge-logo"></div>
-                            <h1>Login</h1>
-                            <?php echo $this->Form->create('User', array('onsubmit' => 'Login.submit(); return false;')); ?>
-                            <?php echo $this->Form->hidden('redirect', array('value' => $redirect)); ?>
-                            <table class="download-info button-wrap">
-                                <tr style="text-align: center">
-                                    <td>
-                                        <div class="flash">Benutzer und Passwort</div>
-                                    </td>
-                                </tr>
-                                <tr class="" style="text-align: center">
-                                    <td>
-                                        <div class="filebox">
-                                            <table class="">
-                                                <tr style="text-align: center">
-                                                    <td>
-                                                        <?php
+                    <h1>Login</h1>
+                    <?php echo $this->Form->create('User', array('onsubmit' => 'Login.submit(); return false;')); ?>
+                    <?php echo $this->Form->hidden('redirect', array('value' => $redirect)); ?>
+                    <table class="download-info button-wrap">
+                        <tr style="text-align: center">
+                            <td>
+                                <div class="flash">Benutzer und Passwort</div>
+                            </td>
+                        </tr>
+                        <tr class="" style="text-align: center">
+                            <td>
+                                <div class="filebox">
+                                    <table class="">
+                                        <tr style="text-align: center">
+                                            <td>
+                                                <?php
 
-                                                        echo $this->Form->input('username', array(
-                                                            'div'       => FALSE,
-                                                            'placeholder'     => 'Benutzer',
-                                                            'autofocus' => 'autofocus',
-                                                            'label'     => FALSE,
-                                                            'tabindex'  => 1
-                                                        )); ?>
-                                                    </td>
-                                                </tr>
-                                                <tr style="text-align: center">
-                                                    <td>
-                                                        <?php
+                                                echo $this->Form->input('username', array(
+                                                    'div'       => FALSE,
+                                                    'placeholder'     => 'Benutzer',
+                                                    'autofocus' => 'autofocus',
+                                                    'label'     => FALSE,
+                                                    'tabindex'  => 1
+                                                )); ?>
+                                            </td>
+                                        </tr>
+                                        <tr style="text-align: center">
+                                            <td>
+                                                <?php
 
-                                                        echo $this->Form->input('password', array(
-                                                            'div'       => FALSE,
-                                                            'placeholder'   => 'Passwort',
-                                                            'type'          => 'password',
-                                                            'label'         => FALSE,
-                                                            'tabindex'      => 2
-                                                        )); ?>
-                                                    </td>
-                                                </tr>
-                                                <tr style="text-align: center">
-                                                    <td>
-                                                        <?php echo $this->Form->button('<i class="glyphicon glyphicon-log-in"></i><span>  Login</span>', array( 'type'=>'submit', 'class' => 'btn btn-success btn-large', 'label' => array( TRUE ) ) ); ?>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </form>
+                                                echo $this->Form->input('password', array(
+                                                    'div'       => FALSE,
+                                                    'placeholder'   => 'Passwort',
+                                                    'type'          => 'password',
+                                                    'label'         => FALSE,
+                                                    'tabindex'      => 2
+                                                )); ?>
+                                            </td>
+                                        </tr>
+                                        <tr style="text-align: center">
+                                            <td>
+                                                <?php echo $this->Form->button('<i class="glyphicon glyphicon-log-in"></i><span>  Login</span>', array( 'type'=>'submit', 'class' => 'btn btn-success btn-large', 'label' => array( TRUE ) ) ); ?>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <?php echo $this->Form->end(); ?>
                 </div>
             </header>
         </div>

@@ -1,7 +1,8 @@
-; this is an INI file
+; images and icon must be in webroot/img
+
 [site]
-logo        = ''
-favicon     = ''
+logo        = 'logo_cropped_200_200.png'
+icon        = 'favicon.ico'
 
 [mysql]
 max_dumps   = 2
