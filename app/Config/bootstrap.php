@@ -180,6 +180,9 @@ if (!defined('SIMPLE_JSON')) {
 if (!defined('FLASH_JSON')) {
     define('FLASH_JSON', '/Elements/flash_json');
 }
+if (!defined('IMAGES_CONFIG_URL')) {
+    define('IMAGES_CONFIG_URL', IMAGES . DS . '/config');
+}
 if (!defined('SALT')) {
     define('SALT', 'urrasjksdjkbsdakbjvgikjbgfiabrg');
 }
@@ -303,7 +306,7 @@ function get_time_diff( $time, $time_unit = "d" ) {
  * Get Site specific Images, Logos & Favicons from config.ini
  */
 function logo_url( $output = FALSE ) {
-    $ret = BASE_URL . DS . IMAGES_URL . Configure::read( 'site.logo' );
+    $ret = BASE_URL . DS . IMAGES_CONFIG_URL . Configure::read( 'site.logo' );
     if ($output) {
         echo $ret;
     } else {
@@ -311,7 +314,7 @@ function logo_url( $output = FALSE ) {
     }
 }
 function icon_url( $output = FALSE ) {
-    $ret = BASE_URL . DS . IMAGES_URL . Configure::read( 'site.icon' );
+    $ret = BASE_URL . DS . IMAGES_CONFIG_URL . Configure::read( 'site.icon' );
     if ($output) {
         echo $ret;
     } else {

@@ -37,3 +37,4 @@ mysqlconf/*
 app/webroot/google58799cfc93ea70b6.html
 *.sql
 app/webroot/deploy.php
+/app/webroot/img/config/*
