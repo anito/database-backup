@@ -62,14 +62,14 @@ class MysqlController extends AppController {
         if ($action == 'dump') {
             $postfix = MYSQL_CMD_PATH . 'mysqldump';
             $io = '>';
-            $message = 'Hooray - Datenbank wurde erfolgreich gesichert';
+            $message = 'Datenbank erfolgreich gesichert';
             $fn = 'file_' . md5(date(time())) . '.sql';
         } elseif ($action == 'restore') {
             $fn = $this->request->query('fn');
             if ( !empty( $fn ) ) {
                 $postfix = MYSQL_CMD_PATH . 'mysql';
                 $io = '<';
-                $message .= 'Hooray - Datenbank wurde erfolgreich wiederhergestellt';
+                $message .= 'Datenbank erfolgreich wiederhergestellt';
             } else {
                 $postfix = '';
                 $io = '<';
@@ -87,7 +87,7 @@ class MysqlController extends AppController {
         exec($cmd, $output, $redirecturn_var);# execute the command
         
         if($redirecturn_var) {
-            $message = 'Sorry - etwas ist schief gelaufen :(';
+            $message = 'Sorry :( ... irgendwas ist schief gelaufen...';
             $result = "error";
         } else {
             $result = "success";
