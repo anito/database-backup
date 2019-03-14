@@ -4,7 +4,6 @@
         <div itemscope itemtype="http://schema.org/SoftwareApplication" class="container">
             <header class="jumbotron masthead">
                 <div class="inner container">
-                    <style>.badge-logo::before{background-image: url(<?php echo logo_url(); ?>)}'</style>
                     <div class="badge-logo"></div>
                     <h1>Login</h1>
                     <?php echo $this->Form->create('User', array('onsubmit' => 'Login.submit(); return false;')); ?>

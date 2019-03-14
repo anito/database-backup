@@ -31,15 +31,14 @@ $cakeDescription = __d('cake_dev', 'Backup DB');
     echo $this->Html->meta('http-equiv', "x-ua-compatible");
     echo $this->Html->meta('icon', icon_url() ); // -> bootstrap.php
     
-//    echo $this->Html->css('bootstrap/css/bootstrap');
-//    echo $this->Html->css('application_boxmodel');
-    
     echo $this->Html->css('app');
     echo $this->Html->css('twitter/bootstrap/css/bootstrap');
     echo $this->Html->css('bootstrap_glyphicons');
     echo $this->Html->css('/js/app/public/application');
+    
+    echo '<style>.badge-logo::before {background-image: url(' . logo_url() . ')}</style>';
+    
     echo $this->Html->script('app/public/application');
-//    echo $this->Html->script('app/lib/jquery/jquery-latest.min');
 
     echo $this->Html->scriptStart();
     ?>
