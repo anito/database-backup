@@ -58,7 +58,7 @@ class MysqlController extends AppController {
         $dsc = $ds->config;
         $db = $dsc['database'];
         $message = '';
-        $ret = $this->request->query('ret');
+        $redirect = $this->request->query('redirect');
         if ($action == 'dump') {
             $postfix = MYSQL_CMD_PATH . 'mysqldump';
             $io = '>';
@@ -84,9 +84,9 @@ class MysqlController extends AppController {
 
         $cmd = sprintf('%1s --defaults-extra-file=' . MYSQLCONFIG . DS . 'my.cnf ' . $db . ' %2s ' . MYSQLUPLOAD . DS . $fn . ' 2>&1', $postfix, $io);
         
-        exec($cmd, $output, $return_var);# execute the command
+        exec($cmd, $output, $redirecturn_var);# execute the command
         
-        if($return_var) {
+        if($redirecturn_var) {
             $message = 'Sorry - etwas ist schief gelaufen :(';
             $result = "error";
         } else {
@@ -98,7 +98,7 @@ class MysqlController extends AppController {
         }
         
         $message = strip_tags( $message );
-        header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . urlencode( $message ) . '&c=' . $result . '&ret=' . urlencode($ret) ));
+        header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . urlencode( $message ) . '&c=' . $result . '&redirect=' . urlencode($redirect) ));
         die;
     }
     
@@ -117,7 +117,7 @@ class MysqlController extends AppController {
             $path = MYSQLUPLOAD . DS . $fn;
             $files = glob($path);
             $fn = basename($files[0]);
-            $ret = $this->request->query('ret');
+            $redirect = $this->request->query('redirect');
             
             if(!empty($files[0])) {
                 $options = compact(array('uid', 'fn'));
@@ -125,7 +125,7 @@ class MysqlController extends AppController {
             } else {
                 $message = 'kein Download verfügbar';
                 $result = 'error';
-                header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . urlencode( $message ) . '&c=' . $result . '&ret=' . urlencode($ret) ));
+                header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . urlencode( $message ) . '&c=' . $result . '&redirect=' . urlencode($redirect) ));
                 die;
             }
         } else {

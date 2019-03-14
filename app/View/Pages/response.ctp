@@ -1,9 +1,9 @@
 <?php
     $params = $this->request->query;
     
-    if( !empty( $params['ret'] ) ) {
-        $url = $params['ret'];
-        $button_text = 'Zurück zum Shop Admin';
+    if( !empty( $params['redirect'] ) ) {
+        $url = $params['redirect'];
+        $button_text = 'Weiter';
     } else {
         $url = DIR_HOST;
         $button_text = 'Zurück';
@@ -26,16 +26,7 @@
                 <tr style="text-align: center">
                     <td>
                         <?php
-                        if( !empty( $params['ret'] ) ) {
-                            echo $this->Form->button('<i class="glyphicon glyphicon-arrow-left"></i><span> ' . $button_text .'</span>', array(
-                                'id' => 'opt-return',
-                                'class' => array('btn-large'),
-                                'target' => "_self",
-                                'label' => array(),
-                                'tabindex' => 0
-                            ));
-                        }
-                        echo $this->Form->button('<i class="glyphicon glyphicon-arrow-left"></i><span> ' . $button_text .'</span>', array(
+                        echo $this->Form->button('<i class="glyphicon glyphicon-arrow-right"></i><span> ' . $button_text .'</span>', array(
                             'id' => 'opt-return',
                             'class' => array('btn-large'),
                             'target' => "_self",
@@ -53,9 +44,21 @@
 <script type="text/javascript">
     (function ($) {
         'use strict';
-        
-        $('#opt-return-shop').focus();
-        
+
+        $.setup = function() {
+            
+            var dumpEl      = $('#opt-return');
+            
+            function focus(e) {
+                
+                dumpEl.focus();
+            }
+            
+            dumpEl.focus();
+            
+        }
     })(jQuery)
-</script>
-    
+    jQuery.setup();
+
+
+</script>    
