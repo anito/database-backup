@@ -181,7 +181,7 @@ if (!defined('FLASH_JSON')) {
     define('FLASH_JSON', '/Elements/flash_json');
 }
 if (!defined('IMAGES_CONFIG_URL')) {
-    define('IMAGES_CONFIG_URL', IMAGES . 'config' . DS);
+    define('IMAGES_CONFIG_URL', IMAGES_URL . 'config' . DS);
 }
 if (!defined('SALT')) {
     define('SALT', 'urrasjksdjkbsdakbjvgikjbgfiabrg');
