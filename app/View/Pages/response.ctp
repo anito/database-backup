@@ -26,7 +26,7 @@
                 <tr style="text-align: center">
                     <td>
                         <?php
-                        echo $this->Form->button('<i class="glyphicon glyphicon-arrow-right"></i><span> ' . $button_text .'</span>', array(
+                        echo $this->Form->button('<i class="glyphicon glyphicon-arrow-left"></i><span> ' . $button_text .'</span>', array(
                             'id' => 'opt-return',
                             'class' => array('btn-large'),
                             'target' => "_self",
