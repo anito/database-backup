@@ -28,7 +28,7 @@
                         <?php
                         echo $this->Form->button('<i class="glyphicon glyphicon-arrow-left"></i><span> ' . $button_text .'</span>', array(
                             'id' => 'opt-return',
-                            'class' => array('btn-large'),
+                            'class' => array('btn-large', 'btn-success'),
                             'target' => "_self",
                             'label' => array(),
                             'tabindex' => 0
