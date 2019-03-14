@@ -2,7 +2,7 @@
 
 [site]
 logo        = 'logo_cropped_200_200.png'
-icon        = 'favicon.ico'
+icon        = 'icon.ico'
 
 [mysql]
 max_dumps   = 2
