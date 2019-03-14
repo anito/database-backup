@@ -1,0 +1,7 @@
+; this is an INI file
+[site]
+logo        = ''
+favicon     = ''
+
+[mysql]
+max_dumps   = 2

@@ -90,6 +90,16 @@ Configure::write('Dispatcher.filters', array(
     'AssetDispatcher',
     'CacheDispatcher'
 ));
+/*
+ * Load Config File config.ini
+ * 
+ * 
+ */
+App::uses('IniReader', 'Configure');
+
+Configure::config( 'ini', new IniReader() );
+Configure::load( 'config', 'ini' );
+
 
 /**
  * Configures Google Analytics
@@ -181,7 +191,7 @@ if (!defined('MAGICK_PATH')) {
     define('MAGICK_PATH_FINAL', MAGICK_PATH);
 }
 if (!defined('MAX_DUMPS')) {
-    define('MAX_DUMPS', 5);
+    define('MAX_DUMPS', Configure::read( 'mysql.max_dumps' ) || 5);
 }
 
 function pre() {
@@ -287,4 +297,14 @@ function get_time_diff( $time, $time_unit = "d" ) {
 			break;
 	}
 	return array( 'total' => round($total, 0, PHP_ROUND_HALF_DOWN), 'name' => $unit_name );
+}
+
+/*
+ * Get Site specific Images, Logos & Favicons from config.ini
+ */
+function logo_url() {
+    return IMAGES_URL . Configure::read( 'site.logo' );
+}
+function icon_url() {
+    return IMAGES_URL . Configure::read( 'site.favicon' );
 }
