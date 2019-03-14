@@ -35,7 +35,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 //    echo $this->Html->css('um-styles');
     echo $this->Html->css('app');
     
-    echo $this->Html->style('.badge-logo::before {background-image: url(' . logo_url() . ')}');
+    echo '<style>.badge-logo::before {background-image: url(' . logo_url() . ')}</style>';
     
     echo $this->Html->script('app/lib/jquery/jquery-latest.min');
     echo $this->Html->script('settings');
