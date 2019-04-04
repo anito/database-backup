@@ -146,6 +146,10 @@ i.info {
     padding-top: 36px;
 }
 .masthead h1,
+.masthead h2,
+.masthead h3,
+.masthead h4,
+.masthead h5,
 .masthead p {
     text-align: center;
 }
