@@ -49,7 +49,7 @@ if( !$date ) {
         <div class="badge-logo"></div>
         <div class="inner">
             <h1>Datenbank</h1>
-            <p>Datenbank Backup</p>
+            <p>Backup Tool</p>
             <?php echo $this->Form->create('User', array('url' => '/u')); ?>
                 <table class="download-info button-wrap">
                     <tr style="text-align: center">
