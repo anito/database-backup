@@ -11,7 +11,7 @@
                     <table class="download-info button-wrap">
                         <tr style="text-align: center">
                             <td>
-                                <div class="flash">Benutzer und_ Passwort</div>
+                                <div class="flash">Benutzer und Passwort</div>
                             </td>
                         </tr>
                         <tr class="" style="text-align: center">
