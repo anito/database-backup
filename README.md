@@ -1,2 +1,2 @@
-# backup_halehmann
-DB backup tool
+# database_backup
+DB Backup Tool
