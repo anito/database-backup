@@ -1,13 +1,4 @@
 {
-<<<<<<< HEAD
-  "name": "app",
-  "version": "1.0.0",
-  "dependencies": {
-    "jade": "^1.11.0",
-    "spine": "^1.6.2",
-    "stylus": "^0.52.4"
-  }
-=======
     "name": "app",
     "version": "1.0.0",
     "dependencies": {
@@ -15,5 +6,4 @@
         "spine": "^1.6.2",
         "stylus": "^0.52.4"
     }
->>>>>>> 0055f53d70d2262f73911a52f6c05042582a72ce
 }
