@@ -46,7 +46,7 @@ class MysqlController extends AppController {
 
         if (!in_array($action, $allowed_actions)) {
             $message = 'Command not in list of allowed commands!';
-            header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . urlencode( $message ) . '&c=error'));
+            header("Location: https://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . urlencode( $message ) . '&c=error'));
             die;
         }
 
@@ -98,7 +98,7 @@ class MysqlController extends AppController {
         }
         
         $message = strip_tags( $message );
-        header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . urlencode( $message ) . '&c=' . $result . '&redirect=' . urlencode($redirect) ));
+        header("Location: https://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . urlencode( $message ) . '&c=' . $result . '&redirect=' . urlencode($redirect) ));
         die;
     }
     
@@ -125,7 +125,7 @@ class MysqlController extends AppController {
             } else {
                 $message = 'kein Download verfügbar';
                 $result = 'error';
-                header("Location: http://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . urlencode( $message ) . '&c=' . $result . '&redirect=' . urlencode($redirect) ));
+                header("Location: https://" . $_SERVER['HTTP_HOST'] . str_replace('//', '/', '/' . BASE_URL . '/pages/response?m=' . urlencode( $message ) . '&c=' . $result . '&redirect=' . urlencode($redirect) ));
                 die;
             }
         } else {
