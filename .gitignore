@@ -4,8 +4,9 @@
 /config/.env
 /logs/*
 /tmp/*
-/vendor/*
-
+#/vendor/*
+/mysql/*
+error_log
 # OS generated files #
 ######################
 .DS_Store
