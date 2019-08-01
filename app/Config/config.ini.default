@@ -1,0 +1,8 @@
+; images and icon must be in webroot/img/config
+
+[site]
+logo        = 'logo_cropped_200_200.png'
+icon        = 'icon.ico'
+
+[mysql]
+max_dumps   = 2
