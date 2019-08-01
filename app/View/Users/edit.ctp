@@ -23,7 +23,7 @@
 		echo $this->Form->input('pwd_confirm', array( 'label' => 'Passwort wiederholen', 'type' => 'password', 'value' => '' ) );
 		echo $this->Form->input('name');
 		echo $this->Form->input('lastlogin', array( 'label' => 'Zuletzt eingeloggt', 'type' => 'text', 'disabled' => TRUE));
-		echo $this->Form->input('enabled', array( 'label' => 'Aktiviert', 'disabled' => !$isAdmin ) );
+		echo $this->Form->input('active', array( 'label' => 'Aktiviert', 'disabled' => !$isAdmin ) );
         if( $isAdmin ):
             echo $this->Form->input('group_id', array( 'label' => 'Gruppe' ) );
         endif;

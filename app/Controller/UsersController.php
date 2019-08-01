@@ -11,7 +11,7 @@ class UsersController extends AppController {
 
     function beforeFilter() {
         
-        $this->Auth->allowedActions = array('login', 'logout', 'ping', 'lastSaved'); //, 'add', 'index', 'edit', 'view');
+        $this->Auth->allowedActions = array('login', 'logout', 'lastSaved', 'apiLastSaved_'); //, 'add', 'index', 'edit', 'view');
         $this->allowedGroups = array('Administrators', 'Managers');
         $this->layout = 'cake';
 
@@ -32,15 +32,12 @@ class UsersController extends AppController {
     }
 
     function ajax_login() {
-        
+        $this->log($this->request->is('ajax'), LOG_DEBUG);
     }
 
     function login() {
-        if( $this->request->is('post') || $this->request->is('ajax') ) {
-//            $this->log($this->request->is('ajax'), LOG_DEBUG);
+        if( $this->request->is('ajax') ) {
             if (!empty($this->data)) {
-//                $this->log('$this->data:', LOG_DEBUG);
-//                $this->log($this->data, LOG_DEBUG);
                 $this->Auth->logout();
                 if ($this->Auth->login() && $this->isAuthGroup()) {
                     $this->User->id = $this->Auth->user('id');
@@ -160,7 +157,6 @@ class UsersController extends AppController {
 
     function edit($id = null) {
         if (!$this->isAuthGroup()) {
-            $this->log('no Authgroup: edit');
             $this->redirect(array('action' => 'login'));
         }
         if (!$id && empty($this->data)) {
@@ -272,15 +268,35 @@ class UsersController extends AppController {
     
     
     
-    public function lastSaved( $human = FALSE ) {
-        $this->layout = false;
-        
-        $files = l($human);
+    public function lastSaved( $human_readable = FALSE ) {
+        $session = Configure::read('Session');
+        $this->autoLayout = FALSE;
+
+        $files = l($human_readable);
         reset( $files );
-        $first = current($files);
-        $this->set('content', $first );
-        $this->render('/Elements/content');
+        $first_file = current($files);
         
+        $this->set( 'content', $first_file );
+        $this->render('/Elements/content');
+    }
+    
+    public function apiLastSaved() {
+        $session = Configure::read('Session');
+        $this->autoLayout = FALSE;
+
+        $files = l2();
+//        $this->log($files, LOG_DEBUG);
+//        die;
+        reset( $files );
+        
+        $first_file = current($files);
+        $text = get_time_diff_text($first_file);
+        $this->set( '_serialize', array( 'last' => $first_file , 'text' => $text ) );
+        
+        $this->render(SIMPLE_JSON);
+        
+//        $this->set( 'content', $first_file );
+//        $this->render('/Elements/content');
     }
 
 }

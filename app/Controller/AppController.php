@@ -41,19 +41,22 @@ class AppController extends Controller {
     ));
 
     function beforeFilter() {
+//        set headers in .htaccess
+//        $this->response->header('Access-Control-Allow-Origin','*');
+//        $this->response->header('Access-Control-Allow-Headers','X-Requested-With');
+//        $this->response->header('Access-Control-Max-Age','7200'); // 2 hours
+        
         if ($this->request->is('ajax')) {
             
             $this->autoRender = FALSE;
-            $this->Auth->autoRedirect = FALSE;
+            $this->autoLayout = FALSE;
+            
             $data = $this->request->input('json_decode');
-            $this->log('json decoded data-> ' . $data, LOG_DEBUG);
             
             if (!empty($data)) {
                 $data = $this->object2Array($data);
                 $this->request->data = $data;
             }
-        } else {
-            $this->Auth->autoRedirect = TRUE;
         }
     }
 

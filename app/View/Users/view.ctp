@@ -37,9 +37,9 @@
 			<?php echo h($user['User']['lastlogin']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Enabled'); ?></dt>
+		<dt><?php echo __('Active'); ?></dt>
 		<dd>
-			<?php echo h($user['User']['enabled']); ?>
+			<?php echo h($user['User']['active']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Group'); ?></dt>

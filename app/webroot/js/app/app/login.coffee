@@ -54,7 +54,6 @@ class Login extends Spine.Controller
         @el
     
     submit: =>
-        @log 'test'
         $.ajax
             data: @form.serialize()
             type: 'POST'
@@ -86,6 +85,7 @@ class Login extends Spine.Controller
         @delay fadeFunc, 1000
 
     error: (xhr, err) =>
+        @log xhr
         flash = $.parseJSON(xhr.responseText)
         flash.status = xhr.status
         flash.statusText = xhr.statusText

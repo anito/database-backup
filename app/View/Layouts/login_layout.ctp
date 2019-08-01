@@ -58,7 +58,7 @@ $cakeDescription = __d('cake_dev', 'Backup DB');
     <?php
     echo $this->Html->scriptEnd();
     echo $this->fetch('meta');
-    echo $scripts_for_layout;
+    // echo $scripts_for_layout;
     ?>
   </head>
   <body class="body">

@@ -132,6 +132,7 @@ define('DIR_REL_HOST', str_replace('/index.php?', '', Configure::read('App.baseU
 define('DIR_HOST', $protocol . preg_replace('/:80$/', '', env('HTTP_HOST')) . DIR_REL_HOST);
 define('BASE_URL', Configure::read('App.baseUrl'));
 define('WEB_URL', '/' . APP_DIR . '/' . WEBROOT_DIR);
+CakeLog::debug(WEBROOT_DIR);
 define('UPLOADS', ROOT . DS . 'uploads');
 define('PHOTOS', UPLOADS . DS . 'photos');
 if(!defined('MYSQLCONFIG')) {
@@ -209,7 +210,7 @@ function returnExt($file) {
     return strtolower(substr($file, $pos + 1, strlen($file)));
 }
 
-function l( $human = FALSE, $sort = SORT_DESC, $fullpath = '' ) {
+function l( $human_readable = FALSE, $sort = SORT_DESC, $fullpath = '' ) {
     App::uses('CakeTime', 'Utility');
     $time = array();
     $path = MYSQLUPLOAD . DS . '*.*';
@@ -224,7 +225,7 @@ function l( $human = FALSE, $sort = SORT_DESC, $fullpath = '' ) {
         $time[$val] = $timestamp;
     }
     array_multisort($time, $sort);
-    if(!$human) {
+    if(!$human_readable) {
         return $time;
     } else {
         foreach ($time as $key => $val) {
@@ -232,6 +233,99 @@ function l( $human = FALSE, $sort = SORT_DESC, $fullpath = '' ) {
         }
         return $time;
     }
+}
+
+function l2( $sort = SORT_DESC, $fullpath = '' ) {
+    App::uses('CakeTime', 'Utility');
+    $time = array();
+    $path = MYSQLUPLOAD . DS . '*.*';
+    $files = glob($path);
+    if(!is_array($files)) $files = [];
+    foreach ($files as $key => $val) {
+        $timestamp = filemtime($val);
+        if(!$fullpath) {
+            $parts = explode(DS, $val);
+            $val = array_pop($parts);
+        }
+        $time[$key]['human'] = CakeTime::format($timestamp, '%d. %b %Y %H:%M');
+        $time[$key]['unix'] = $timestamp;
+        $time[$key]['filename'] = $val;
+    }
+    array_multisort($time, $sort);
+    
+    return $time;
+}
+
+function get_time_diff_text( $file ) {
+    
+    $max_allowed_age = -1; // -1 for display always
+    
+    $timestamp = $file['unix'];
+    if( !empty( $timestamp ) ) {
+		$last_backup = intval( $timestamp );
+		if( ( $diff = get_date_diff( $last_backup, 'i' ) ) && ( $diff['total'] > 59 ) ) { // express in minutes
+			if( ( $diff = get_date_diff( $last_backup, 'h' ) ) && ( $diff['total'] > 23 ) ) { // express in hours
+				if( ( $diff = get_date_diff( $last_backup, 'd' ) ) && ( $diff['total'] > 29 ) ) { // express in days
+					if( ( $diff = get_date_diff( $last_backup, 'm' ) ) && ( $diff['total'] > 11 ) ) { // express in months
+						$diff = get_date_diff( $last_backup, 'y' ); // express in years
+					}
+				}
+			}
+		}
+		if ( $max_allowed_age >= $diff['total'] )
+			return;
+        
+		$age  = $diff['total'] . ' ' . $diff['name'];
+//        $info = sprintf( ' vor <strong>%s</strong><span class="dimmed"> am <i>%s</i></span>', $age, date_create( date( "Y-m-d H:i:s", $timestamp ) )  );
+        $info = sprintf( ' vor <strong>%s</strong><span class="dimmed"> am <i>%s</i></span>', $age, CakeTime::format($timestamp, '%d. %b %Y %H:%M') );
+	} else {
+		$info	= '<strong><span style="color: #f00;">Noch kein Backup vorhanden!</span></strong>';
+	}
+    
+    $text =  sprintf( 'Letztes <strong><a href="%s" target="_blank">Datenbank Backup</a></strong> %s', BASE_URL, $info );
+    return $text;
+    
+}
+
+/*
+ * get the age in days of Backup
+ * 
+ */
+function get_date_diff( $time, $time_unit = "d" ) {
+	
+	$timeZone = 'Europe/Berlin';
+    date_default_timezone_set($timeZone);
+	
+	$now = date_create();
+
+	if ( !isset( $time ) )
+		$time = $now;
+
+	$lst = date_create( date( "Y-m-d H:i:s", $time ) );
+	$diff = date_diff( $lst, $now );
+	switch( $time_unit ) {
+		case "y":
+			$total = $diff->y + $diff->m / 12 + $diff->d / 365.25;
+			$unit_name = sprintf( __('Jahr%s', 1 !== $total ? 'en' : '' ) );
+			break;
+		case "m":
+			$total= $diff->y * 12 + $diff->m + $diff->d/30 + $diff->h / 24;
+			$unit_name = sprintf( __('Monat%s', 1 !== $total ? 'en' : '' ) );
+			break;
+		case "d":
+			$total = $diff->y * 365.25 + $diff->m * 30 + $diff->d + $diff->h/24 + $diff->i/60;
+			$unit_name = sprintf( __('Tag%s', 1 < $total ? 'en' : '') );
+			break;
+		case "h":
+			$total = ($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h + $diff->i/60;
+			$unit_name = sprintf( __('Stunde%s', 1 !== $total ? 'n' : '' ) );
+			break;
+		case "i":
+			$total = (($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i + $diff->s/60;
+			$unit_name = sprintf( __('Minute%s', 1 !== $total ? 'n' : '') );
+			break;
+	}
+	return array( 'total' => round($total, 0, PHP_ROUND_HALF_DOWN), 'name' => $unit_name );
 }
 
 function c($max = 5) {
@@ -253,53 +347,18 @@ function p($options) {
     );
     $o = array_merge($defaults, $options);
     $args = join(',', array($o['uid'], $o['fn']));
-    include_once(ROOT . DS . 'app' . DS . 'Controller' . DS . 'Component' . DS . 'SaltComponent.php');
+
+    include_once (ROOT . DS . 'app' . DS . 'Controller' . DS . 'Component' . DS . 'SaltComponent.php');
 
     $salt = new SaltComponent();
-    $crypt = $salt->convert($args);
+    $crypt = $salt->convert($args); //encode
+
     $path = MYSQLUPLOAD . DS . $o['fn'];
     $m = filemtime($path);
     $x = returnExt($path);
 //    $timestamp = gmdate('D, d M Y H:i:s');
     $timestamp = date('Ymd:His');
     return BASE_URL . '/q/a:' . $crypt . '/dump:' . $timestamp . '_' . $m . '.' . $x;
-}
-/*
- * get difference of 2 times
- * 
- */
-function get_time_diff( $time, $time_unit = "d" ) {
-
-	$now = date_create();
-
-	if ( !isset( $time ) )
-		$time = $now;
-
-	$lst = date_create( date( "Y-m-d H:i:s", $time ) );
-	$diff = date_diff( $lst, $now );
-	switch( $time_unit ) {
-		case "y":
-			$total = $diff->y + $diff->m / 12 + $diff->d / 365.25;
-			$unit_name = sprintf( 'Jahr%s', 1 !== $total ? 'en' : ''  );
-			break;
-		case "m":
-			$total= $diff->y * 12 + $diff->m + $diff->d/30 + $diff->h / 24;
-			$unit_name = sprintf( 'Monat%s', 1 !== $total ? 'en' : ''  );
-			break;
-		case "d":
-			$total = $diff->y * 365.25 + $diff->m * 30 + $diff->d + $diff->h/24 + $diff->i/60;
-			$unit_name = sprintf( 'Tag%s', 1 < $total ? 'en' : ''  );
-			break;
-		case "h":
-			$total = ($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h + $diff->i/60;
-			$unit_name = sprintf( 'Stunde%s', 1 !== $total ? 'n' : ''  );
-			break;
-		case "i":
-			$total = (($diff->y * 365.25 + $diff->m * 30 + $diff->d) * 24 + $diff->h) * 60 + $diff->i + $diff->s/60;
-			$unit_name = sprintf( 'Minute%s', 1 !== $total ? 'n' : ''  );
-			break;
-	}
-	return array( 'total' => round($total, 0, PHP_ROUND_HALF_DOWN), 'name' => $unit_name );
 }
 
 /*

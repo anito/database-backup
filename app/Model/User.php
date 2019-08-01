@@ -26,7 +26,7 @@ class User extends AppModel {
         if (!empty($this->data[$this->alias]['pwd'])) {
             $passwordHasher = new BlowfishPasswordHasher();
             $this->data[$this->alias]['password'] = $passwordHasher->hash(
-                    $this->data[$this->alias]['pwd']
+                    $this->data[$this->alias]['password']
             );
         }
         return true;

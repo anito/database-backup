@@ -41,7 +41,7 @@ class MysqlController extends AppController {
         $allowed_actions = array('dump', 'restore', 'connect');
 
         $action = array_splice($this->passedArgs, 0, 1);
-        $action = $action[0];
+        $action = count($action) > 0 ? $action[0] : [];
         $args = implode(' ', $this->passedArgs);
 
         if (!in_array($action, $allowed_actions)) {
@@ -54,7 +54,7 @@ class MysqlController extends AppController {
     }
 
     function mysql($action, $args = '') {
-        $ds = ConnectionManager::getDataSource('default');
+        $ds = ConnectionManager::getDataSource('target_db');
         $dsc = $ds->config;
         $db = $dsc['database'];
         $message = '';
@@ -154,7 +154,7 @@ class MysqlController extends AppController {
         $salt = new SaltComponent();
 
         $val = str_replace(' ', '.2B', $val);
-        $crypt = $salt->convert($val, false);
+        $crypt = $salt->convert($val, false); //decode
         $a = explode(',', $crypt);
         $file = $fn = basename($a[1]);
 

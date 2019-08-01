@@ -1,4 +1,4 @@
-<?php $ret = isset($this->request->query['ret']) ? $this->request->query['ret'] : ''; ?>
+<?php $redirect = isset($this->request->query['ret']) ? $this->request->query['redirect'] : ''; ?>
 <div class="views">
     <div id="login" class="login-view view">
         <div itemscope itemtype="http://schema.org/SoftwareApplication" class="container">

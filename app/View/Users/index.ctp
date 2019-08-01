@@ -17,7 +17,7 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('username');?></th>
 			<th><?php echo $this->Paginator->sort('name');?></th>
-			<th><?php echo $this->Paginator->sort('enabled');?></th>
+			<th><?php echo $this->Paginator->sort('active');?></th>
 			<th><?php echo $this->Paginator->sort('group_id');?></th>
 			<th class="actions"><?php echo __('Actions');?></th>
 	</tr>
@@ -27,7 +27,7 @@
 	<tr>
 		<td><?php echo h($user['User']['username']); ?>&nbsp;</td>
 		<td><?php echo h($user['User']['name']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['enabled']); ?>&nbsp;</td>
+		<td><?php echo h($user['User']['active']); ?>&nbsp;</td>
 		<td>
             <?php if( $loggedin_user['Group']['name'] == 'Administrators' ) : ?>
 			<?php echo $this->Html->link($user['Group']['name'], array('controller' => 'groups', 'action' => 'view', $user['Group']['id'])); ?>

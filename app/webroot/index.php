@@ -75,9 +75,11 @@ if (!defined('CAKE_CORE_INCLUDE_PATH') && file_exists($vendorPath . DS . $dispat
  */
 if (!defined('WEBROOT_DIR')) {
 	define('WEBROOT_DIR', basename(dirname(__FILE__)));
+	// Debugger::log(WEBROOT_DIR);
 }
 if (!defined('WWW_ROOT')) {
 	define('WWW_ROOT', dirname(__FILE__) . DS);
+	// Debugger::log(WWW_ROOT);
 }
 
 // For the built-in server

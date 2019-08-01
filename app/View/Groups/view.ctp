@@ -37,7 +37,7 @@
 		<th><?php echo __('Created'); ?></th>
 		<th><?php echo __('Modified'); ?></th>
 		<th><?php echo __('Lastlogin'); ?></th>
-		<th><?php echo __('Enabled'); ?></th>
+		<th><?php echo __('Active'); ?></th>
 		<th><?php echo __('Group Id'); ?></th>
 		<th class="actions"><?php echo __('Actions');?></th>
 	</tr>
@@ -51,8 +51,8 @@
 			<td><?php echo $user['name'];?></td>
 			<td><?php echo $user['created'];?></td>
 			<td><?php echo $user['modified'];?></td>
-			<td><?php echo $user['lastlogin'];?></td>
-			<td><?php echo $user['enabled'];?></td>
+			<td><?php echo $user['last_login'];?></td>
+			<td><?php echo $user['active'];?></td>
 			<td><?php echo $user['group_id'];?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'users', 'action' => 'view', $user['id'])); ?>

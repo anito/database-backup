@@ -29,11 +29,11 @@ if( !$date ) {
     $files_raw     = l(); // get UNIX-Timestamp
     reset( $files_raw );
     $last_backup    = current($files_raw);
-    if( ( $diff = get_time_diff( $last_backup, 'i' ) ) && ( $diff['total'] > 59 ) ) { // express in minutes
-        if( ( $diff = get_time_diff( $last_backup, 'h' ) ) && ( $diff['total'] > 23 ) ) { // express in hours
-            if( ( $diff = get_time_diff( $last_backup, 'd' ) ) && ( $diff['total'] > 29 ) ) { // express in days
-                if( ( $diff = get_time_diff( $last_backup, 'm' ) ) && ( $diff['total'] > 11 ) ) { // express in months
-                    $diff = get_time_diff( $last_backup, 'y' ); // express in years
+    if( ( $diff = get_date_diff( $last_backup, 'i' ) ) && ( $diff['total'] > 59 ) ) { // express in minutes
+        if( ( $diff = get_date_diff( $last_backup, 'h' ) ) && ( $diff['total'] > 23 ) ) { // express in hours
+            if( ( $diff = get_date_diff( $last_backup, 'd' ) ) && ( $diff['total'] > 29 ) ) { // express in days
+                if( ( $diff = get_date_diff( $last_backup, 'm' ) ) && ( $diff['total'] > 11 ) ) { // express in months
+                    $diff = get_date_diff( $last_backup, 'y' ); // express in years
                 }
             }
         }
