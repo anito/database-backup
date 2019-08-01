@@ -27,12 +27,9 @@ Icon?
 ehthumbs.db
 Thumbs.db
 /node_modules
-/app/webroot/js/app/node_modules
 nbproject
 mysql/*
 mysqlconf/*
 /app/webroot/googlec455ce6e66bdc8d6.html
 app/webroot/google58799cfc93ea70b6.html
 *.sql
-app/webroot/deploy.php
-/app/webroot/img/config/*
