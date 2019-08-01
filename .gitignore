@@ -7,6 +7,7 @@
 /tmp/*
 #/vendor/*
 /mysql/*
+/mysqlconfig/*
 /app
 /app/*
 error_log
