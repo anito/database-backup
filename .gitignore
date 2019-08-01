@@ -6,7 +6,7 @@
 /tmp/*
 #/vendor/*
 /mysql/*
-/app/*
+/app
 error_log
 # OS generated files #
 ######################
