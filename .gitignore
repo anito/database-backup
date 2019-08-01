@@ -1,8 +1,6 @@
 # User specific & automatically generated files #
 #################################################
-/app/Config/database.php
-/app/Config/config.ini
-/app/tmp/*
+/app
 /lib/Cake/Console/Templates/skel/tmp/
 /plugins
 /vendors
