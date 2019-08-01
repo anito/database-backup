@@ -4,8 +4,8 @@
 /config/.env
 /logs/*
 /tmp/*
-/vendor/*
-
+#/vendor/*
+/mysql/*
 # OS generated files #
 ######################
 .DS_Store
@@ -38,3 +38,4 @@ nbproject/*
 .vscode
 # Sass preprocessor
 .sass-cache/
+mysql/file_367c10c9bc8e1267f6d0ec7ed49e8b89.sql
