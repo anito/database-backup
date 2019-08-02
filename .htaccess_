@@ -7,21 +7,13 @@
 <IfModule mod_rewrite.c>
     RewriteEngine on
     RewriteRule    ^(\.well-known/.*)$ $1 [L]
-    #RewriteRule    ^123$    app/    [L]
-    #RewriteRule    (.*) webroot/$1    [L]
-    #RewriteRule	(.*) test/ [L]
-	#RewriteRule ^(.*)$ test/$1 [L]
-	#RewriteRule (.*) app/$1 [L]
-	#RewriteRule (.*) test/$1 [L]
-</IfModule>
-<IfModule mod_deflate.c>
-	AddType image/svg+xml svg svgz
-	AddEncoding gzip svgz
+    RewriteRule    ^$    webroot/    [L]
+    RewriteRule    (.*) webroot/$1    [L]
 </IfModule>
 <IfModule mod_headers.c>
     Header set Access-Control-Allow-Methods: "POST, GET, PUT, OPTIONS"
     Header set Access-Control-Allow-Credentials true
-    Header set Access-Control-Allow-Origin "https://ha-lehmann.at"
+    Header set Access-Control-Allow-Origin "https://webpremiere.dev"
     Header set Access-Control-Allow-Headers "Authorization, Origin, X-Requested-With, Content-Type"
     Header set Access-Control-Max-Age: 3600
 </IfModule>

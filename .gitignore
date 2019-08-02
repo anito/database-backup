@@ -1,12 +1,15 @@
 # CakePHP specific files #
 ##########################
 /config/app.php
+/config/config.ini
 /config/.env
 /logs/*
 /tmp/*
 #/vendor/*
 /mysql/*
+/mysqlconf/*
 /app
+/app/*
 error_log
 # OS generated files #
 ######################
@@ -40,4 +43,3 @@ nbproject/*
 .vscode
 # Sass preprocessor
 .sass-cache/
-error_log
