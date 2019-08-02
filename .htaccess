@@ -1,12 +1,14 @@
+# Uncomment the following to prevent the httpoxy vulnerability
+# See: https://httpoxy.org/
+#<IfModule mod_headers.c>
+#    RequestHeader unset Proxy
+#</IfModule>
+
 <IfModule mod_rewrite.c>
-	RewriteEngine on
-	RewriteBase /
-	RewriteRule ^$ app/webroot/ [L]
-	RewriteRule (.*) app/webroot/$1 [L]
-</IfModule>
-<IfModule mod_deflate.c>
-	AddType image/svg+xml svg svgz
-	AddEncoding gzip svgz
+    RewriteEngine on
+    RewriteRule    ^(\.well-known/.*)$ $1 [L]
+    RewriteRule    ^$    webroot/    [L]
+    RewriteRule    (.*) webroot/$1    [L]
 </IfModule>
 <IfModule mod_headers.c>
     Header set Access-Control-Allow-Methods: "POST, GET, PUT, OPTIONS"
