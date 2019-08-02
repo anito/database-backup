@@ -35,10 +35,10 @@ class SettingsController extends AppController {
     }
 
     public function read() {
-        $user = $this->Auth->identify();
-        if (!$user) {
-            throw new UnauthorizedException('Invalid username or password');
-        }
+        // $user = $this->Auth->identify();
+        // if (!$user) {
+        //     throw new UnauthorizedException('Invalid username or password');
+        // }
 
         $allowed_settings = ['Refresh' => [], 'Client' => [], 'Error' => []];
         $settings = Configure::read();
