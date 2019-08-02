@@ -19,7 +19,10 @@ class UsersController extends AppController
             if ($event->subject->created) {
                 $this->set('data', [
                     'id' => $event->subject->entity->id,
-                    'token' => JWT::encode([],
+                    'token' => JWT::encode([
+                        'sub' => $event->subject->entity->id,
+                        'exp' =>  time() + 604800
+                    ],
                     Security::salt())
                 ]);
                 $this->Crud->action()->config('serialize.data', 'data');
@@ -28,8 +31,6 @@ class UsersController extends AppController
         return $this->Crud->execute();
     }
     // 
-    // 'sub' => $event->subject->entity->id,
-    // 'exp' =>  time() + 604800
 
 
     public function token() {
@@ -41,15 +42,15 @@ class UsersController extends AppController
         $this->set([
             'success' => true,
             'data' => [
-                'token' => JWT::encode([],
+                'token' => JWT::encode([
+                    'sub' => $user['id'],
+                    'exp' =>  time() + 604800
+                ],
                 Security::salt())
             ],
             '_serialize' => ['success', 'data']
         ]);
         $this->render();
     }
-    // 
-    // 'sub' => $user['id'],
-    // 'exp' =>  time() //+ 604800
 
 }
