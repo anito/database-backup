@@ -1,11 +1,16 @@
 # CakePHP specific files #
 ##########################
 /config/app.php
+/config/config.ini
 /config/.env
 /logs/*
 /tmp/*
-/vendor/*
-
+#/vendor/*
+/mysql/*
+/mysqlconf/*
+/app
+/app/*
+error_log
 # OS generated files #
 ######################
 .DS_Store
