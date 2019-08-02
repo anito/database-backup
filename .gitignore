@@ -5,6 +5,7 @@
 /config/.env
 /logs/*
 /tmp/*
+/webroot/deploy.php
 #/vendor/*
 /mysql/*
 /mysqlconf/*
