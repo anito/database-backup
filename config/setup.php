@@ -15,6 +15,7 @@ use Cake\Log\Log;
 Configure::config( 'settings', new IniConfig() );
 Configure::load( 'config', 'settings' );
 (new ErrorHandler(Configure::read('Error')))->register();
+Configure::write('DebugKit.safeTld', Configure::read('DebugKit.tld'));
 
 Cache::setConfig('mysql_conf', [
     'className' => 'File',
