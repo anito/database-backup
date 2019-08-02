@@ -57,14 +57,6 @@ class MysqlController extends AppController {
 
     }
 
-    public function add_() {
-        $user = $this->Auth->identify();
-        if (!$user) {
-            throw new UnauthorizedException('Invalid username or password');
-        }
-        return $this->Crud->execute();
-    }
-
     public function restore() {
         $user = $this->Auth->identify();
         if (!$user) {
