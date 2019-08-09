@@ -37,13 +37,14 @@ class AppController extends Controller
         ]);
 
         $this->loadComponent('Auth', [
-            'storage' => 'Memory',
+            'storage' => 'Session',
             'authError' => __('Not Authorized'),
             'authenticate' => [
                 'Form' => [
                     'scope' => ['Users.active' => 1]
                 ],
                 'ADmad/JwtAuth.Jwt' => [
+                    'cookie' => 'Jwt',
                     'parameter' => 'token',
                     'userModel' => 'Users',
                     'scope' => ['Users.active' => 1],
