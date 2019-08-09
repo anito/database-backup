@@ -63,6 +63,7 @@ class Login extends Spine.Controller
         @el
     
     submit: =>
+        @log @form.serialize()
         $.ajax
             data: @form.serialize()
             type: 'POST'
@@ -96,7 +97,6 @@ class Login extends Spine.Controller
             @delay redirectFunc, 2000
         redirectFunc = ->
             User.redirect()
-            # User.redirect '/users'
 
         @delay fadeFunc, 1000
 

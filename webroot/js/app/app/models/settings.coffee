@@ -36,7 +36,7 @@ class Settings extends Spine.Model
 
   @fail: ( options ) =>
     (json, status, xhr) =>
-      User.redirect '/logout'
+      Model.User.redirect '/logout'
 
   init: ( instance ) ->
 

@@ -84,21 +84,22 @@ class MysqlTable extends Table
             $action = $request['pass'][0];
             // Log::write('debug', '$action');
             // Log::write('debug', $action);
-        }
-
-        // if(!empty($request['pass'])) {
-        //     $action = $request['pass'][0]; // for routes with joker like /api/mysql/mysql/*
-        // }
-        $response = mysql( $action ); // $action == dump
-        
-        if( $response['success']) {
+            
+            // if(!empty($request['pass'])) {
+            //     $action = $request['pass'][0]; // for routes with joker like /api/mysql/mysql/*
+            // }
+            $response = mysql( $action ); // $action == dump
+            
+            if( !$response['success']) {
+                return false;
+            }
+            
             $filename = $response['filename'];
             $data = $event->getData();
             $data['entity']->filename = $filename;
             $event->setData('entity', $data );
-            return true;
         }
-        return false;
+        return true;
     }
 
     function afterSave( $event ) {

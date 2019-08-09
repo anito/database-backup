@@ -7109,6 +7109,7 @@ Released under the MIT License
     };
 
     Login.prototype.submit = function() {
+      this.log(this.form.serialize());
       return $.ajax({
         data: this.form.serialize(),
         type: 'POST'
@@ -7445,7 +7446,7 @@ Released under the MIT License
 
     Settings.fail = function(options) {
       return function(json, status, xhr) {
-        return User.redirect('/logout');
+        return Model.User.redirect('/logout');
       };
     };
 

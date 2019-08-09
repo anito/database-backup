@@ -36,10 +36,8 @@ class MysqlController extends AppController {
     }
 
     public function index() {
-        // $user = $this->Auth->identify();
-        // if (!$user) {
-        //     throw new UnauthorizedException('Invalid username or password');
-        // }
+
+        $this->recover();
         $this->Crud->on('beforeRender', [$this, '_beforeRender']);
         return $this->Crud->execute();
     }
@@ -58,10 +56,6 @@ class MysqlController extends AppController {
     }
 
     public function restore() {
-        $user = $this->Auth->identify();
-        if (!$user) {
-            throw new UnauthorizedException('Invalid username or password');
-        }
 
         $result = mysql('restore');
 
@@ -72,16 +66,17 @@ class MysqlController extends AppController {
             '_serialize' => ['success', 'message', 'filename']
         ]);
 
-        // return $this->Crud->execute();
         $this->render();
         
         // c(MAX_DUMPS); // cleanup dump files
-        // $files = l();
-        // $this->recover( $files );
-
+        
     }
-
+    
     protected function recover( $files = [] ) {
+        if( empty($files) ) {
+            $files = l();
+            // Log::write('debug', $files);
+        }
 
         foreach ($files as $key => $file) {
             $mysql = $this->Mysql->newEntity();
