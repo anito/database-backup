@@ -36,10 +36,10 @@ class MysqlController extends AppController {
     }
 
     public function index() {
-        // $user = $this->Auth->identify();
-        // if (!$user) {
-        //     throw new UnauthorizedException('Invalid username or password');
-        // }
+        $user = $this->Auth->identify();
+        if (!$user) {
+            throw new UnauthorizedException('Invalid username or password');
+        }
         $this->Crud->on('beforeRender', [$this, '_beforeRender']);
         return $this->Crud->execute();
     }
