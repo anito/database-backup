@@ -91,11 +91,14 @@ class Application extends BaseApplication
     }
 
     public function routes($routes) {
-        $options = [
-            'cookieName' => 'test',
-            'httpOnly' => true,
-            'secure' => true
-        ];
+        // $_defaultConfig = [
+        //     'cookieName' => 'csrfToken',
+        //     'expiry' => 0,
+        //     'secure' => false,
+        //     'httpOnly' => false,
+        //     'field' => '_csrfToken',
+        // ];
+        $options = [];
         $routes->registerMiddleware('csrf', new CsrfProtectionMiddleware($options));
         parent::routes($routes);
     }
