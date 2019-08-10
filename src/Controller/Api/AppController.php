@@ -44,7 +44,6 @@ class AppController extends Controller
                     'scope' => ['Users.active' => 1]
                 ],
                 'ADmad/JwtAuth.Jwt' => [
-                    'cookie' => 'Jwt',
                     'parameter' => 'token',
                     'userModel' => 'Users',
                     'scope' => ['Users.active' => 1],
