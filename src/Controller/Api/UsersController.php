@@ -36,7 +36,7 @@ class UsersController extends AppController
     public function token() {
         $user = $this->Auth->identify();
         if (!$user) {
-            throw new UnauthorizedException('Invalid username or password');
+            throw new UnauthorizedException(__('Invalid username or password'));
         }
 
         $this->set([

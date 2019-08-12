@@ -121,7 +121,6 @@ class JwtAuthenticate extends BaseAuthenticate
      */
     public function authenticate(ServerRequest $request, Response $response)
     {
-        Log::write('debug', $this->getUser($request));
         return $this->getUser($request);
     }
 
