@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2019-08-12 04:19+0200\n"
-"PO-Revision-Date: 2019-08-12 04:22+0200\n"
+"PO-Revision-Date: 2019-08-12 04:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -348,8 +348,6 @@ msgid "Users"
 msgstr "Benutzer"
 
 #: Template/Users/login.ctp:31
-#, fuzzy
-#| msgid "Users"
 msgid "User"
 msgstr "Benutzer"
 
