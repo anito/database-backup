@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2019-07-31 22:54+0200\n"
-"PO-Revision-Date: 2019-07-31 22:58+0200\n"
+"POT-Creation-Date: 2019-08-12 04:19+0200\n"
+"PO-Revision-Date: 2019-08-12 04:22+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -14,6 +14,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.3\n"
+
+#: Controller/AppController.php:80 Controller/Api/AppController.php:41
+msgid "Not Authorized"
+msgstr "Keine Berechtigung"
 
 #: Controller/GroupsController.php:57 Controller/GroupsController.php:81
 msgid "The group has been saved."
@@ -92,9 +96,9 @@ msgstr "Der Benutzer wurde gelöscht."
 msgid "The user could not be deleted. Please, try again."
 msgstr "Der Benutzer konnte nicht gelöscht werden. Bitte versuche es erneut."
 
-#: Controller/Api/AppController.php:41
-msgid "Not Authorized"
-msgstr "Keine Berechtigung"
+#: Controller/Api/UsersController.php:39
+msgid "Invalid username or password"
+msgstr "Ungültiger Benutzername oder Passwort"
 
 #: Model/Table/UsersTable.php:96
 msgid "Passwords do not match"

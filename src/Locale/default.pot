@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2019-07-31 22:54+0200\n"
+"POT-Creation-Date: 2019-08-12 04:19+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -13,6 +13,11 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/AppController.php:80
+#: Controller/Api/AppController.php:41
+msgid "Not Authorized"
+msgstr ""
 
 #: Controller/GroupsController.php:57
 #: Controller/GroupsController.php:81
@@ -96,8 +101,8 @@ msgstr ""
 msgid "The user could not be deleted. Please, try again."
 msgstr ""
 
-#: Controller/Api/AppController.php:41
-msgid "Not Authorized"
+#: Controller/Api/UsersController.php:39
+msgid "Invalid username or password"
 msgstr ""
 
 #: Model/Table/UsersTable.php:96
