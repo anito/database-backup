@@ -306,9 +306,6 @@ function icon_url( $output = FALSE ) {
  */
 function get_date_diff( $time, $time_unit = "d" ) {
 	
-	$timeZone = 'Europe/Berlin';
-    date_default_timezone_set($timeZone);
-	
 	$now = date_create();
 
 	if ( !isset( $time ) )
@@ -343,7 +340,7 @@ function get_date_diff( $time, $time_unit = "d" ) {
 			$unit_name = sprintf( __('Minute%s'), 1 !== (int) $total ? 'n' : '');
 			break;
     }
-	return array( 'total' => $total, 'name' => $unit_name );
+	return array( 'total' => $total, 'name' => $unit_name, 'timestamp' => $time );
 }
 
 function express_date_diff( $time ) {

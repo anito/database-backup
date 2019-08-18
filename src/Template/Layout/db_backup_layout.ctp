@@ -24,7 +24,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
     </title>
-    <?= $this->Html->meta('icon', icon_url() ); // -> bootstrap.php) ?>
+    <?= $this->Html->meta('icon', icon_url() ); // see setup.php) ?>
 
     <?= $this->Html->css('twitter/bootstrap/css/bootstrap') ?>
     <?= $this->Html->css('bootstrap_glyphicons') ?>

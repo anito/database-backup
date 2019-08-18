@@ -29,7 +29,7 @@ $cakeDescription = __d('cake_dev', 'Backup DB');
     <?php
     echo $this->Html->meta(array('name' => 'viewport', 'content'=> 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1'));
     echo $this->Html->meta('http-equiv', "x-ua-compatible");
-    echo $this->Html->meta('icon', icon_url() ); // -> defined in setup.php
+    echo $this->Html->meta('icon', icon_url() ); // see in setup.php
 
     echo $this->Html->css('twitter/bootstrap/css/bootstrap');
     echo $this->Html->css('bootstrap_glyphicons');
