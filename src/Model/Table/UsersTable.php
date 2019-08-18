@@ -75,20 +75,7 @@ class UsersTable extends Table
             ->notEmptyString('password', 'create')
             ->allowEmptyString('password', 'update');
             
-        // $validator
-        //     ->add('password_confirm', [
-        //         'minLength' => [
-        //             'rule' => ['minLength', 10],
-        //             'last' => true,
-        //             'message' => 'Comments must have a substantial body.'
-        //         ],
-        //         'maxLength' => [
-        //             'rule' => ['maxLength', 250],
-        //             'message' => 'Comments cannot be too long.'
-        //         ]
-        //     ]);
         $validator
-        // ->equalToField('password_confirm', 'password', __('Passwords do not match'))
             ->add('password_confirm', [
                 'equalToField' => [
                     'rule' => ['compareFields', 'password', '=='],
@@ -113,7 +100,7 @@ class UsersTable extends Table
 
         if( $isEmptyPassword ) {
             $data = $event->getData();
-            unset($data['entity']->password);
+            // unset($data['entity']->password);
         }
         
         return true;
@@ -128,8 +115,8 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['username']));
-        $rules->add($rules->existsIn(['group_id'], 'Groups'));
+        $rules->add($rules->isUnique(['username'], __('The Username already exists')));
+        $rules->add($rules->existsIn( ['group_id'], 'Groups') );
 
         return $rules;
     }
