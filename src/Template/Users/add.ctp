@@ -20,11 +20,17 @@
             echo $this->Form->control('name');
             echo $this->Form->control('username');
             echo $this->Form->control('password');
-            echo $this->Form->control('password_confirm', ['type' => 'password']);
-            echo $this->Form->control('active');
-            echo $this->Form->control('group_id', ['options' => $group]);
+            echo $this->Form->control('password_confirm', ['type' => 'password', 'label' => __('Password Confirm')]);
+            if($isAdmin) {
+                echo $this->Form->control('active');
+                echo $this->Form->control('group_id', ['options' => $group]);
+            } else {
+                echo $this->Form->control('active', ['type' => 'hidden', 'value' => 1]);
+                echo $this->Form->control('group_id', ['type' => 'hidden', 'value' => 3]);
+
+            }
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Register')) ?>
     <?= $this->Form->end() ?>
 </div>

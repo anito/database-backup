@@ -59,6 +59,9 @@
                         </tr>
                     </table>
                     <?php echo $this->Form->end(); ?>
+                    <div class="centered">
+                        <?php echo $this->Html->link( __('Register'), '/register'); ?>
+                    </div>
                 </div>
             </header>
         </div>

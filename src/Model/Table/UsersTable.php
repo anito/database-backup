@@ -115,7 +115,7 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['username'], __('The Username already exists')));
+        $rules->add($rules->isUnique(['username'], __('This username already exists')));
         $rules->add($rules->existsIn( ['group_id'], 'Groups') );
 
         return $rules;

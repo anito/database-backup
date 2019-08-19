@@ -31,6 +31,9 @@ body {
     -webkit-transition: opacity 0.15s linear;
     transition: opacity 0.15s linear;
 }
+.centered {
+    text-align: center;
+}
 .flash {
     display: inline-block;
 }
@@ -55,6 +58,7 @@ body {
     background: transparent;
     border-radius: 6px;
     color: #000;
+    margin-bottom: 10px;
 }
 .message.error {
     background: #f14a4a;

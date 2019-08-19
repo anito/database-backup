@@ -68,6 +68,7 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
     
     $routes->connect('/logout', array('controller' => 'Users', 'action' => 'logout'));
+    $routes->connect('/register', array('controller' => 'Users', 'action' => 'add'));
     $routes->connect('/u/*', array('controller' => 'Mysql', 'action' => 'uri'));
     $routes->connect('/q/*', array('controller' => 'Mysql', 'action' => 'getFile'));
     // Router::connect('/js/app/', array('controller' => 'Js', 'action' => ''));

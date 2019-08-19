@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2019-08-12 04:19+0200\n"
-"PO-Revision-Date: 2019-08-12 04:29+0200\n"
+"POT-Creation-Date: 2019-08-19 01:34+0200\n"
+"PO-Revision-Date: 2019-08-19 01:34+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -51,48 +51,44 @@ msgstr "Mysql wurde gelöscht."
 msgid "The mysql could not be deleted. Please, try again."
 msgstr "Mysql konnte nicht gelöscht werden. Bitte versuchen Sie es erneut."
 
-#: Controller/UsersController.php:32
+#: Controller/UsersController.php:33
 msgid "Logged in as <strong>%s</strong>"
 msgstr "Angemeldet als <strong>%s</strong>"
 
-#: Controller/UsersController.php:45
+#: Controller/UsersController.php:46
 msgid "Login failed"
 msgstr "Anmeldung fehlgeschlagen"
 
-#: Controller/UsersController.php:52
+#: Controller/UsersController.php:53
 msgid "Username und Password"
 msgstr "Benutzer und Passwort"
 
-#: Controller/UsersController.php:59
+#: Controller/UsersController.php:60
 msgid "You are now logged out"
 msgstr "Du wurdest abgemeldet"
 
-#: Controller/UsersController.php:119
-msgid "You are not allowed to add new users."
-msgstr "Du bist nicht berechtigt neue Benutzer anzulegen."
-
-#: Controller/UsersController.php:126 Controller/UsersController.php:158
+#: Controller/UsersController.php:123 Controller/UsersController.php:155
 msgid "The user has been saved."
 msgstr "Der Benutzer wurde gespeichert."
 
-#: Controller/UsersController.php:130 Controller/UsersController.php:162
+#: Controller/UsersController.php:127 Controller/UsersController.php:159
 msgid "The user could not be saved. Please, try again."
 msgstr ""
 "Der Benutzer konnte nicht gespeichert werden. Bitte versuche es erneut."
 
-#: Controller/UsersController.php:148
+#: Controller/UsersController.php:145
 msgid "You are not allowed to edit this user."
 msgstr "Du bist nicht berechtigt diesen Benutzer zu ändern."
 
-#: Controller/UsersController.php:179
+#: Controller/UsersController.php:176
 msgid "You are not allowed to delete this user."
 msgstr "Du bist nicht berechtigt diesen Benutzer zu löschen."
 
-#: Controller/UsersController.php:186
+#: Controller/UsersController.php:183
 msgid "The user has been deleted."
 msgstr "Der Benutzer wurde gelöscht."
 
-#: Controller/UsersController.php:188
+#: Controller/UsersController.php:185
 msgid "The user could not be deleted. Please, try again."
 msgstr "Der Benutzer konnte nicht gelöscht werden. Bitte versuche es erneut."
 
@@ -100,9 +96,13 @@ msgstr "Der Benutzer konnte nicht gelöscht werden. Bitte versuche es erneut."
 msgid "Invalid username or password"
 msgstr "Ungültiger Benutzername oder Passwort"
 
-#: Model/Table/UsersTable.php:96
+#: Model/Table/UsersTable.php:83
 msgid "Passwords do not match"
 msgstr "Passwörter stimmen nicht überein"
+
+#: Model/Table/UsersTable.php:118
+msgid "This username already exists"
+msgstr "Dieser Benutzername existiert bereits"
 
 #: Template/Cocktails/add.ctp:9 Template/Cocktails/edit.ctp:9
 #: Template/Cocktails/index.ctp:9 Template/Cocktails/index.ctp:23
@@ -130,7 +130,7 @@ msgstr "Cocktail hinzufügen"
 #: Template/Cocktails/add.ctp:22 Template/Cocktails/edit.ctp:28
 #: Template/Groups/add.ctp:23 Template/Groups/edit.ctp:29
 #: Template/Mysql/add.ctp:22 Template/Mysql/edit.ctp:28
-#: Template/Users/add.ctp:28 Template/Users/edit.ctp:36
+#: Template/Users/edit.ctp:36
 msgid "Submit"
 msgstr "Speichern"
 
@@ -339,6 +339,14 @@ msgstr "Dateiname"
 msgid "Add User"
 msgstr "Benutzer erstellen"
 
+#: Template/Users/add.ctp:23
+msgid "Password Confirm"
+msgstr "Passwort wiederholen"
+
+#: Template/Users/add.ctp:34
+msgid "Register"
+msgstr "Registrieren"
+
 #: Template/Users/edit.ctp:24 Template/Users/view.ctp:10
 msgid "Edit User"
 msgstr "Benutzer bearbeiten"
@@ -370,6 +378,9 @@ msgstr "Ja"
 #: Template/Users/view.ctp:51
 msgid "No"
 msgstr "Nein"
+
+#~ msgid "You are not allowed to add new users."
+#~ msgstr "Du bist nicht berechtigt neue Benutzer anzulegen."
 
 #~ msgid "Did you really think you are allowed to see that?"
 #~ msgstr "Keine Berechtigung!"

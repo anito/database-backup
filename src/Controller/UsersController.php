@@ -19,6 +19,7 @@ class UsersController extends AppController
     public function initialize() {
         parent::initialize();
         $this->allowedGroups = ['Administrators'];
+        $this->Auth->allow(['add']);
     }
 
     public function login() {
@@ -29,7 +30,7 @@ class UsersController extends AppController
                 $_user = $this->Users->get($user['id']);
                 $_user->last_login = date('Y-m-d H:i:s');
                 $this->Users->save($_user);
-                $this->Flash->success(sprintf( __('Logged in as <strong>%s</strong>'), $user['name'] ), ['escape' => false] );
+                $this->Flash->success(sprintf( __('Logged in as <strong>%s</strong>'), ($name = $user['name']) ? $name : $user['username'] ), ['escape' => false] );
                 $this->set('_serialize', [
                     'success' => true,
                     'data' => [
@@ -115,17 +116,13 @@ class UsersController extends AppController
      */
     public function add()
     {
-        if (!$this->isAuthGroup()) {
-            $this->Flash->error(__('You are not allowed to add new users.'));
-            return $this->redirect(array('action' => 'login'));
-        }
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'login']);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
