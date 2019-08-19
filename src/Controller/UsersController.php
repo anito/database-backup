@@ -19,11 +19,10 @@ class UsersController extends AppController
     public function initialize() {
         parent::initialize();
         $this->allowedGroups = ['Administrators'];
-        $this->Auth->allow(['add']);
     }
 
     public function login() {
-        $this->Auth->logout();
+        
         if( $this->request->is('ajax') ) {
             if ($user = $this->Auth->identify()) {
                 $this->Auth->setUser($user);
@@ -120,7 +119,8 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(sprintf(__('The user has been saved')));
+                $this->Flash->success(sprintf(__('Please <a href="mailto:support@ha-lehmann.at?subject=[DB Backup Tool] New User Account: %1$s&body=Please activate my account for user %1$s" target="_blank">Activate Your Account</a>'), $user->username), ['escape' => false]);
 
                 return $this->redirect(['action' => 'login']);
             }
