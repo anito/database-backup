@@ -77,7 +77,7 @@ class AppController extends Controller
 
         $this->loadComponent('Auth', [
             'storage' => 'Session',
-            'authError' => __('Not Authorized'),
+            'authError' => __('Please log in'),
             'authenticate' => [
                 'Form' => [
                     'scope' => ['Users.active' => 1]

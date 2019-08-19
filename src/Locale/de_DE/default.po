@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2019-08-19 01:34+0200\n"
-"PO-Revision-Date: 2019-08-19 01:34+0200\n"
+"POT-Creation-Date: 2019-08-19 14:28+0200\n"
+"PO-Revision-Date: 2019-08-19 14:33+0200\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: de\n"
@@ -15,9 +15,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.3\n"
 
-#: Controller/AppController.php:80 Controller/Api/AppController.php:41
-msgid "Not Authorized"
-msgstr "Keine Berechtigung"
+#: Controller/AppController.php:80
+msgid "Please log in"
+msgstr "Bitte anmelden"
 
 #: Controller/GroupsController.php:57 Controller/GroupsController.php:81
 msgid "The group has been saved."
@@ -51,25 +51,35 @@ msgstr "Mysql wurde gelöscht."
 msgid "The mysql could not be deleted. Please, try again."
 msgstr "Mysql konnte nicht gelöscht werden. Bitte versuchen Sie es erneut."
 
-#: Controller/UsersController.php:33
+#: Controller/UsersController.php:32
 msgid "Logged in as <strong>%s</strong>"
 msgstr "Angemeldet als <strong>%s</strong>"
 
-#: Controller/UsersController.php:46
+#: Controller/UsersController.php:45
 msgid "Login failed"
 msgstr "Anmeldung fehlgeschlagen"
 
-#: Controller/UsersController.php:53
+#: Controller/UsersController.php:52
 msgid "Username und Password"
 msgstr "Benutzer und Passwort"
 
-#: Controller/UsersController.php:60
+#: Controller/UsersController.php:59
 msgid "You are now logged out"
 msgstr "Du wurdest abgemeldet"
 
-#: Controller/UsersController.php:123 Controller/UsersController.php:155
-msgid "The user has been saved."
-msgstr "Der Benutzer wurde gespeichert."
+#: Controller/UsersController.php:122
+msgid "The user has been saved"
+msgstr "Der Benutzer wurde gespeichert"
+
+#: Controller/UsersController.php:123
+msgid ""
+"Please <a href=\"mailto:support@ha-lehmann.at?subject=[DB Backup Tool] New "
+"User Account: %1$s&body=Please activate my account for user %1$s\" target="
+"\"_blank\">Activate Your Account</a>"
+msgstr ""
+"Bitte <a href=\"mailto:support@ha-lehmann.at?subject=[DB Backup Tool] Neuer "
+"Benutzer: %1$s&body=Bitte aktiviere mein Konto: Benutzer %1$s\" target="
+"\"_blank\">lasse dein Konto aktivieren</a>"
 
 #: Controller/UsersController.php:127 Controller/UsersController.php:159
 msgid "The user could not be saved. Please, try again."
@@ -79,6 +89,10 @@ msgstr ""
 #: Controller/UsersController.php:145
 msgid "You are not allowed to edit this user."
 msgstr "Du bist nicht berechtigt diesen Benutzer zu ändern."
+
+#: Controller/UsersController.php:155
+msgid "The user has been saved."
+msgstr "Der Benutzer wurde gespeichert."
 
 #: Controller/UsersController.php:176
 msgid "You are not allowed to delete this user."
@@ -91,6 +105,10 @@ msgstr "Der Benutzer wurde gelöscht."
 #: Controller/UsersController.php:185
 msgid "The user could not be deleted. Please, try again."
 msgstr "Der Benutzer konnte nicht gelöscht werden. Bitte versuche es erneut."
+
+#: Controller/Api/AppController.php:41
+msgid "Not Authorized"
+msgstr "Keine Berechtigung"
 
 #: Controller/Api/UsersController.php:39
 msgid "Invalid username or password"
@@ -343,7 +361,7 @@ msgstr "Benutzer erstellen"
 msgid "Password Confirm"
 msgstr "Passwort wiederholen"
 
-#: Template/Users/add.ctp:34
+#: Template/Users/add.ctp:30 Template/Users/login.ctp:63
 msgid "Register"
 msgstr "Registrieren"
 
