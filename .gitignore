@@ -12,6 +12,7 @@
 /app
 /app/*
 error_log
+php-error.log
 # OS generated files #
 ######################
 .DS_Store
