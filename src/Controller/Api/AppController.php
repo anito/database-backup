@@ -54,8 +54,7 @@ class AppController extends Controller
                 ]
             ],
             'unauthorizedRedirect' => false,
-            'checkAuthIn' => 'Controller.initialize',
-            'loginAction' => false
+            'checkAuthIn' => 'Controller.initialize'
         ]);
 
     }
