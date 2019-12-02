@@ -39,7 +39,7 @@ class Application extends BaseApplication
 
         $this->addPlugin('ADmad/JwtAuth');
 
-        $this->addPlugin('Cors', ['bootstrap' => true, 'routes' => false]);
+        $this->addPlugin('Cors', ['bootstrap' => true, 'routes' => false, 'AllowOrigin' => false]);
 
         // Call parent to load bootstrap from files.
         parent::bootstrap();
