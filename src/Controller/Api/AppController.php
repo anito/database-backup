@@ -37,7 +37,7 @@ class AppController extends Controller
         ]);
 
         $this->loadComponent('Auth', [
-            'storage' => 'Session',
+            'storage' => 'Memory',
             'authError' => __('Not Authorized'),
             'authenticate' => [
                 'Form' => [
@@ -55,6 +55,7 @@ class AppController extends Controller
             ],
             'unauthorizedRedirect' => false,
             'checkAuthIn' => 'Controller.initialize',
+            'loginAction' => false
         ]);
 
     }
