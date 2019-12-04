@@ -14,3 +14,6 @@
 <IfModule mod_headers.c>
     # Access Control Headers are set in app.php: 'crud' => [AllowOrigin => '*', ...]
 </IfModule>
+
+# Prevent the server from stripping away AUTHORIZATION Header
+SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
