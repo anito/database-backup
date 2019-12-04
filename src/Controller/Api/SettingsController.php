@@ -36,9 +36,9 @@ class SettingsController extends AppController {
 
     public function read() {
 
-        $allowed_settings = ['Refresh' => [], 'Client' => [], 'Error' => [], 'Overdue' => [] ];
+        $allowed = ['Refresh', 'Client', 'Error', 'Overdue', 'Site'];
         $settings = Configure::read();
-        $settings = array_intersect_key($settings, $allowed_settings);
+        $settings = array_intersect_key($settings, array_flip($allowed));
 
         $this->set([
             'success' => true,

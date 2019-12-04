@@ -207,11 +207,11 @@ function mysql( $action = '' ) {
     $allowed_actions = array('dump', 'restore');
     $message = '';
     
-    if (!in_array($action, $allowed_actions)) {
-        $message = sprintf('Ungültiger Datenbankbefehl: "%s" !', $action);
+    if (in_array($action, $allowed_actions)) {
+        $result = _mysql($action);
+        return $result;
     }
-    $result = _mysql($action, $message);
-    return $result;
+    die( sprintf('Ungültiger Datenbankbefehl: "%s" !', $action) );
 }
 
 function _mysql($action) {
