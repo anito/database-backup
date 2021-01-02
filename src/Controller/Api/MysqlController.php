@@ -67,11 +67,11 @@ class MysqlController extends AppController {
         ]);
 
         $this->render();
-        
+
         // c(MAX_DUMPS); // cleanup dump files
-        
+
     }
-    
+
     protected function recover( $files = [] ) {
         if( empty($files) ) {
             $files = l();

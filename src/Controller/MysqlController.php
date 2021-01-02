@@ -126,12 +126,12 @@ class MysqlController extends AppController
 
     public function uri() {
         $this->autoRender = false;
-        
+
         $json = array();
         $fn = '*.*';
         if ($this->Auth->user()) {
             $uid = $this->Auth->user('id');
-            
+
             if (!empty($this->data)) {
                 foreach ($this->data as $data) {
                     if(!empty($data['fn'])) {
@@ -143,7 +143,7 @@ class MysqlController extends AppController
             $files = glob($path);
             $fn = basename($files[0]);
             $redirect = $this->request->getParam('redirect');
-            
+
             if(!empty($files[0])) {
                 $options = compact(array('uid', 'fn'));
                 $file = p($this, $options);
@@ -160,12 +160,12 @@ class MysqlController extends AppController
         header("Location: $file" );
         die;
     }
-    
+
     function getFile() {
         $this->autoRender = false;
-        
+
         $val = $this->request->getParam('named.a');
-        
+
         if (strpos($val, 'http://') !== false || substr($val, 0, 1) == '/') {
             header('Location: ' . $val);
             exit;
@@ -175,7 +175,7 @@ class MysqlController extends AppController
 
         $crypt = $this->Salt->convert($val, false); //decode
         $a = explode(',', $crypt);
-        
+
         $file = $fn = basename($a[1]);
 
         // Make sure supplied filename contains only approved chars
@@ -186,7 +186,7 @@ class MysqlController extends AppController
 
         $file = MYSQLUPLOAD . DS . $file;
         $disabled_functions = explode(',', ini_get('disable_functions'));
-        
+
         if (USE_X_SEND) {
             header("X-Sendfile: $file");
             header("Content-type: application/octet-stream");

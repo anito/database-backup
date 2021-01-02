@@ -22,7 +22,7 @@ class UsersController extends AppController
     }
 
     public function login() {
-        
+
         if( $this->request->is('ajax') ) {
             if ($user = $this->Auth->identify()) {
                 $this->Auth->setUser($user);
@@ -149,7 +149,7 @@ class UsersController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            
+
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
