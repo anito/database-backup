@@ -76,9 +76,10 @@ if(!defined('MYSQLUPLOAD')) {
 if (!defined('MYSQL_CMD_PATH')) {
     $a = explode('.', DIR_HOST);
     $last = count($a) - 1;
+    $local_tld = array( 'dev', 'mbp', 'local' );
     $tl = $a[$last];
     $path = '';
-    if ($tl == 'dev' || $tl == 'local') {
+    if( in_array( $tl, $local_tld ) ) {
         $path = '/usr/local/mysql/bin/';
     }
     define('MYSQL_CMD_PATH', $path);

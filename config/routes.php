@@ -66,7 +66,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      * ...and connect the rest of 'Pages' controller's URLs.
      */
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
-    
+
     $routes->connect('/logout', array('controller' => 'Users', 'action' => 'logout'));
     $routes->connect('/register', array('controller' => 'Users', 'action' => 'add'));
     $routes->connect('/u/*', array('controller' => 'Mysql', 'action' => 'uri'));
